@@ -1,0 +1,33 @@
+:root {
+  --lightText: #fff;
+  --neutral: #1a1a1a;
+  --info: #482bd9;
+  --success: #007505;
+  --warning: #e5c100;
+  --danger: #b20000;
+  --primaryMain: #ff703e;
+  --primary: #0065c1;
+  --primaryHover: #004889;
+  --headerFooter: #757575;
+  --main-animation-delay: 1s;
+  --main-animation-duration: 2s;
+}
+.buttonColored {
+  background-color: var(--primaryMain);
+  color: var(--lightText);
+}
+ .buttonGlass {
+  color: var(--neutral);
+  background-color: rgba(171, 161, 161, 0.1);
+  backdrop-filter: blur(1px);
+}
+
+ .buttonLight {
+  color: var(--primaryMain);
+  background-color: var(--lightText);
+}
+
+.buttonDisable {
+  border-color: #9e9e9e;
+  color: #9e9e9e;
+}
