@@ -35,8 +35,8 @@ const { _id, name, images, category, description, reviews, rating } = props.card
 <style scoped>
 @import '@/assets/style/variable';
 .card {
-  min-width: 520px;
-
+  min-width: 480px;
+  max-width: 520px;
   border-radius: 8px;
   overflow: hidden;
 }

@@ -1,19 +1,27 @@
 <template>
-  <button class="button"><slot /></button>
+  <button class="button">
+    <img v-if="image" :src="image" />
+    <slot />
+  </button>
 </template>
 
 <script setup lang="ts">
 defineOptions({
   name: 'my-button'
 })
+
 const props = defineProps<{
-  image?: String
+  image?: string
 }>()
 </script>
 
 <style scoped>
 @import '@/assets/style/main.css';
+
 .button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
   cursor: pointer;
   border-radius: 4px;
   border: 2px solid var(--primaryMain);

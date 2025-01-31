@@ -10,7 +10,7 @@
         :style="{ backgroundImage: `url(${image})` }"
       ></div>
 
-      ...
+  
     </div>
     <!-- If we need pagination -->
     <div class="swiper-pagination"></div>
@@ -42,7 +42,8 @@ onMounted(() => {
       prevEl: '.swiper-button-prev'
     },
     pagination: {
-      el: '.swiper-pagination'
+      el: '.swiper-pagination',
+      clickable: true
     },
     autoplay: {
       delay: 1000
@@ -74,18 +75,17 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
 }
-
+.swiper-pagination-bullet {
+  border-radius: 1px !important;
+}
 .swiper {
   --swiper-navigation-size: 14px;
- 
+  --swiper-pagination-bullet-inactive-opacity: 0.7;
   --swiper-pagination-bullet-inactive-color: #ffffff;
   --swiper-navigation-color: var(--primaryMain);
   --swiper-pagination-color: var(--primaryMain);
 }
 
-.swiper-pagination-bullet-active {
-  background: #f00; 
-}
 .button {
   border-radius: 50%;
   padding: 20px;

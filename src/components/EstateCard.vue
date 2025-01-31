@@ -63,6 +63,13 @@ const { name, images, description, price, area, bathroom, beds, rating, location
   flex-direction: column;
   justify-content: space-between;
 }
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
 .price {
   font-size: 28px;
   font-weight: 500;
@@ -78,7 +85,7 @@ const { name, images, description, price, area, bathroom, beds, rating, location
   position: absolute;
   top: 0px;
 }
-.card-category{
+.card-category {
   margin: 20px;
   z-index: 10;
   position: absolute;

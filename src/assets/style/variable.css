@@ -9,20 +9,23 @@
   --primary: #0065c1;
   --primaryHover: #004889;
   --headerFooter: #757575;
+  --primaryHeader: #424242;
   --main-animation-delay: 1s;
   --main-animation-duration: 2s;
+  --p-paginator-nav-button-selected-background: blue;
+  
 }
 .buttonColored {
   background-color: var(--primaryMain);
   color: var(--lightText);
 }
- .buttonGlass {
+.buttonGlass {
   color: var(--neutral);
   background-color: rgba(171, 161, 161, 0.1);
   backdrop-filter: blur(1px);
 }
 
- .buttonLight {
+.buttonLight {
   color: var(--primaryMain);
   background-color: var(--lightText);
 }

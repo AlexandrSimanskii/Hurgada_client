@@ -1,18 +1,24 @@
 <template>
   <header class="header container">
     <router-link to="/"
-      ><img class="logo" src="/src/assets/images/image/hurghada.png" alt="hurghada"
+      ><img
+        @click="heandlerClickLogo"
+        class="logo"
+        src="/src/assets/images/image/hurghada.png"
+        alt="hurghada"
     /></router-link>
 
     <ul class="navigation">
       <li
-        class="navigation__el" 
+        class="navigation__el"
+        :class="list[0] == activeLink ? 'navigation__el--active' : ''"
         v-for="list of Object.entries(navList)"
-        @click="$router.push(list[1])"
-        :key="list[0]"                                    
+        @click="(e) => heandlerClickList(e, list)"
+        :key="list[0]"
       >
         {{ list[0] }}
       </li>
+      <li class="decoration" :style="{ left: decorationLeft, width: decorationWidth }"></li>
     </ul>
     <div class="weather">
       <img src="/src/assets/images/icons/wheather.png" alt="cloud" />Hurghada, Red Sea
@@ -28,34 +34,39 @@
       <div class="img"></div>
     </div>
   </header>
+  <Toast />
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-const navList: {
-  'Thinks to do': string
-  Excursions: string
-  News: string
-  'Night life': string
-  'Food guide': string
-  'Real estate': string
-  Jobs: string
-  'Airport transfer': string
-  'Contact us': string
-} = {
-  'Thinks to do': 'think',
-  Excursions: 'excursions',
-  News: 'news',
-  'Night life': 'nightlife',
-  'Food guide': 'foodguide',
-  'Real estate': 'realestate',
-  Jobs: 'jobs',
-  'Airport transfer': 'airport',
-  'Contact us': 'contacts'
+import { useToast } from 'primevue/usetoast'
+import Toast from 'primevue/toast'
+const toast = useToast()
+
+const show = () => {
+  toast.add({
+    severity: 'warn',
+    summary: 'Info',
+    detail: 'Этот контент еще в разработке',
+    life: 3000
+  })
 }
 
+import navList from '@/utils/navlist'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 const temperature = ref('')
-const isAnimate = ref(false)
+const activeLink = ref('')
+const decorationLeft = ref('0')
+const decorationWidth = ref('0')
+
+const rawHeader = sessionStorage.getItem('header')
+const storage = rawHeader ? JSON.parse(rawHeader) : ''
+
+activeLink.value = storage.activeLink
+decorationLeft.value = storage.decorationLeft
+decorationWidth.value = storage.decorationWidth
 
 const getWheather = () => {
   fetch(`https://api.weatherapi.com/v1/current.json?key=69ed7b91ab4b4d4f9f282327242604&q=Hurghada`)
@@ -68,6 +79,38 @@ const getWheather = () => {
     })
 }
 getWheather()
+
+const heandlerClickList = (e: Event, list: string[]) => {
+  if (!list[1]) {
+    show()
+    return
+  }
+
+  const target = e.target as HTMLElement
+  const targetCoords = target.getBoundingClientRect()
+  const width = targetCoords.width
+  const left = targetCoords.left
+  const navigationLeft = document.querySelector('.navigation')?.getBoundingClientRect().left
+  activeLink.value = list[0]
+  decorationLeft.value = `${left - (navigationLeft || 0)}px`
+  decorationWidth.value = `${width}px`
+
+  router.push(list[1])
+
+  const storage = {
+    activeLink: list[0],
+    decorationLeft: decorationLeft.value,
+    decorationWidth: decorationWidth.value
+  }
+
+  sessionStorage.setItem('header', JSON.stringify(storage))
+}
+
+function heandlerClickLogo() {
+  sessionStorage.setItem('header', '')
+  decorationLeft.value = '0'
+  decorationWidth.value = '0'
+}
 </script>
 
 <style scoped lang="css">
@@ -105,27 +148,33 @@ getWheather()
 
 .icons {
   display: flex;
-
-  &__el {
-    padding: 0 30px;
-    cursor: pointer;
-    &:not(:last-child) {
-      border-right: 1px solid #616161;
-    }
-  }
 }
-
+.icons__el {
+  padding: 0 30px;
+  cursor: pointer;
+}
+.icons__el:not(:last-child) {
+  border-right: 1px solid #616161;
+}
 .navigation {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
   column-gap: 20px;
   flex-wrap: wrap;
-  height: 20px;
+  height: 24px;
   overflow-y: hidden;
-  &__el {
-    cursor: pointer;
-  }
+}
+.navigation__el {
+  padding-bottom: 6px;
+  cursor: pointer;
+}
+
+.navigation__el:hover {
+  transform: translateY(-2px);
+
+  transition: 500ms;
 }
 
 .language {
@@ -135,17 +184,27 @@ getWheather()
 }
 .img {
   position: relative;
-  &::before {
-    content: '';
-    position: absolute;
-    right: -5px;
-    top: 50%;
-    mask-image: url(@assets/images/icons/language.svg);
-    mask-size: cover;
-    width: 5px;
-    height: 5px;
-    background-color: rgb(0, 255, 98);
-  }
+}
+.img ::before {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  mask-image: url(@assets/images/icons/language.svg);
+  mask-size: cover;
+  width: 5px;
+  height: 5px;
+  background-color: rgb(0, 255, 98);
+}
+.decoration {
+  transition-duration: 500ms;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+
+  height: 3px;
+  background-color: var(--primaryMain);
 }
 @keyframes headerAnimate {
   from {

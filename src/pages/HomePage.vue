@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import partners from '@/utils/partners'
-import TopSection from '@/components/TopSection.vue'
+import TopSection from '@/components/HomeTop.vue'
 import CardApp from '@/components/CardApp.vue'
 
 import CardsSection from '@/components/CardsSection.vue'
@@ -60,7 +60,7 @@ const getFoodCards = async () => {
   try {
     const data = await fetch(`${BASE_URL}foods/get`)
     const cards = await data.json()
-    foodCards.value = cards
+    foodCards.value = cards.data
   } catch (error) {
     console.log("Ошибка при получении 'foodCards'")
   }
@@ -69,7 +69,7 @@ const getNightCards = async () => {
   try {
     const data = await fetch(`${BASE_URL}nights/get`)
     const cards = await data.json()
-    nightCards.value = cards
+    nightCards.value = cards.data
   } catch (error) {
     console.log("Ошибка при получении 'foodCards'")
   }
