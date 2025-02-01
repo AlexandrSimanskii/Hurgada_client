@@ -5,14 +5,17 @@
   >
     Foods</top-section
   >
-  <content-section :categories="allCategories" :cards="cards">choose how you fexdfsdf</content-section>
- <my-pagination  @page="changePage" :limit="limit" :totalCount="totalCount"></my-pagination>
- 
- <description-section></description-section>
+  <content-section :categories="allCategories" :cards="data"
+    >choose how you fexdfsdf</content-section
+  >
+  <my-pagination @page="changePage" :limit="limit" :totalCount="totalCount"></my-pagination>
+
+  <!-- <description-section></description-section> -->
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useFetchData } from '@/composables/useFetchData'
 import MyPagination from '@/components/MyPagination.vue'
 import type { Ref } from 'vue'
 import TopSection from '@/components/sections/TopSection.vue'
@@ -20,37 +23,25 @@ import ContentSection from '@/components/sections/ContentSection.vue'
 import DescriptionSection from '@/components/sections/DescriptionSection.vue'
 import { EXCURSION } from '@/constants'
 
-import { type CardsType,  } from '@/types/types'
+import { type CardsType } from '@/types/types'
 
-const cards: Ref<CardsType[]> = ref([])
 const allCategories = ref([])
 const limit = 6
 const page = ref(1)
 const category = ref('')
-let totalCount = ref(0)
 
-const getExcursionCards = async () => {
-  const queryParams = new URLSearchParams({
+const queryParams = computed(() =>
+  new URLSearchParams({
     limit: String(limit),
     page: String(page.value),
     category: category.value
   }).toString()
+)
 
-  try {
-    const response = await fetch(`${EXCURSION}?${queryParams}`)
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
-
-    const newCards = await response.json()
-totalCount.value= newCards.totalCount
-    cards.value = newCards.data
-  } catch (error) {
-    console.log("Ошибка при получении 'foodCards'")
-  }
-}
-getExcursionCards()
+const { data, totalCount, loading, error, fetchData } = useFetchData<CardsType>(
+  EXCURSION,
+  queryParams
+)
 
 async function getCategories(url: string) {
   try {
@@ -63,10 +54,8 @@ async function getCategories(url: string) {
 }
 getCategories(EXCURSION)
 
-function changePage(newPage:number){
-  page.value=newPage
-  getExcursionCards()
-
+function changePage(newPage: number) {
+  page.value = newPage
 }
 </script>
 

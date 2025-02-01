@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import partners from '@/utils/partners'
+import partners from '@/constants/partners'
 import TopSection from '@/components/HomeTop.vue'
 import CardApp from '@/components/CardApp.vue'
 

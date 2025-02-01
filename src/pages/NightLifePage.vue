@@ -5,57 +5,39 @@
   >
     Night life</top-section
   >
-  <content-section :categories="allCategories" :cards="cards"
+  <content-section :categories="allCategories" :cards="data"
     >choose how you want to spend the night</content-section
   >
-  <my-pagination @page="changeCards" :limit="limit" :totalCount="totalCount"></my-pagination>
+  <my-pagination class="a" @page="changeCards" :limit="limit" :totalCount="totalCount"></my-pagination>
 
-  <description-section></description-section>
+  <!-- <description-section></description-section> -->
 </template>
 
 <script setup lang="ts">
+import { useFetchData } from '@/composables/useFetchData'
 import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
 import MyPagination from '@/components/MyPagination.vue'
 import DescriptionSection from '@/components/sections/DescriptionSection.vue'
 import { NIGHTS } from '@/constants'
 import { type CardsType } from '@/types/types'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 
-const cards: Ref<CardsType[]> = ref([])
 const allCategories = ref([])
 const limit = 6
 const page = ref(1)
 const category = ref('')
-let totalCount = ref(0)
 
-async function getNight() {
-  const queryParams = new URLSearchParams({
+const queryParams = computed(() =>
+  new URLSearchParams({
     limit: String(limit),
     page: String(page.value),
     category: category.value
   }).toString()
+)
 
-console.log(queryParams);
-
-
-
-
-  try {
-    const response = await fetch(`${NIGHTS}?${queryParams}`)
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
-
-    const newData = await response.json()
-    totalCount.value = newData.totalCount
-    cards.value = newData.data
-  } catch (error) {}
-}
-
-getNight()
+const { data, totalCount, loading, error, fetchData } = useFetchData<CardsType>(NIGHTS, queryParams)
 
 async function getCategories(url: string) {
   try {
@@ -68,17 +50,14 @@ async function getCategories(url: string) {
 }
 getCategories(NIGHTS)
 
-
-
-
 function changeCards(newPage: number) {
   page.value = newPage
-  getNight()
 }
 </script>
 
 <style scoped>
 @import '@/assets/style/main.css';
+.a{margin-top: 30px;}
 .top {
   text-transform: uppercase;
   color: var(--primaryHeader);

@@ -51,7 +51,7 @@ const show = () => {
   })
 }
 
-import navList from '@/utils/navlist'
+import navList from '@/constants/navlist'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
