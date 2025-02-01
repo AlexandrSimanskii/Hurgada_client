@@ -10,7 +10,7 @@
     choose how you foods
   </content-section>
 
-  <my-pagination @page="changeCards" :limit="limit" :totalCount="totalCount"></my-pagination>
+  <my-pagination @page="page = $event" :limit="limit" :totalCount="totalCount"></my-pagination>
   <description-section v-bind="descriptionsAttr"></description-section>
 </template>
 
@@ -59,9 +59,7 @@ onMounted(() => {
   getCategories(FOODS)
 })
 
-function changeCards(newPage: number) {
-  page.value = newPage
-}
+
 </script>
 
 <style scoped>

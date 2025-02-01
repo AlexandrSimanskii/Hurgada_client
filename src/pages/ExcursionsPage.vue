@@ -5,10 +5,8 @@
   >
     Foods</top-section
   >
-  <content-section :categories="allCategories" :cards="data"
-    >choose how you fexdfsdf</content-section
-  >
-  <my-pagination @page="changePage" :limit="limit" :totalCount="totalCount"></my-pagination>
+  <content-section :categories="categories" :cards="data">choose how you fexdfsdf</content-section>
+  <my-pagination @page="page = $event" :limit="limit" :totalCount="totalCount"></my-pagination>
 
   <!-- <description-section></description-section> -->
 </template>
@@ -16,7 +14,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useFetchData } from '@/composables/useFetchData'
+import { useFetchCategories } from '@/composables/useFetchCategories'
 import MyPagination from '@/components/MyPagination.vue'
+
 import type { Ref } from 'vue'
 import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
@@ -25,7 +25,6 @@ import { EXCURSION } from '@/constants'
 
 import { type CardsType } from '@/types/types'
 
-const allCategories = ref([])
 const limit = 6
 const page = ref(1)
 const category = ref('')
@@ -38,25 +37,12 @@ const queryParams = computed(() =>
   }).toString()
 )
 
+const { categories } = useFetchCategories<string>(`${EXCURSION}/categories`)
+
 const { data, totalCount, loading, error, fetchData } = useFetchData<CardsType>(
   EXCURSION,
   queryParams
 )
-
-async function getCategories(url: string) {
-  try {
-    const fetchCategory = await fetch(`${url}/categories`)
-
-    allCategories.value = await fetchCategory.json()
-  } catch (error) {
-    console.log(error)
-  }
-}
-getCategories(EXCURSION)
-
-function changePage(newPage: number) {
-  page.value = newPage
-}
 </script>
 
 <style scoped></style>

@@ -8,7 +8,12 @@
   <content-section :categories="allCategories" :cards="data"
     >choose how you want to spend the night</content-section
   >
-  <my-pagination class="a" @page="changeCards" :limit="limit" :totalCount="totalCount"></my-pagination>
+  <my-pagination
+    class="a"
+    @page="page = $event"
+    :limit="limit"
+    :totalCount="totalCount"
+  ></my-pagination>
 
   <!-- <description-section></description-section> -->
 </template>
@@ -50,14 +55,14 @@ async function getCategories(url: string) {
 }
 getCategories(NIGHTS)
 
-function changeCards(newPage: number) {
-  page.value = newPage
-}
+
 </script>
 
 <style scoped>
 @import '@/assets/style/main.css';
-.a{margin-top: 30px;}
+.a {
+  margin-top: 30px;
+}
 .top {
   text-transform: uppercase;
   color: var(--primaryHeader);
