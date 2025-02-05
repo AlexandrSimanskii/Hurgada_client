@@ -6,9 +6,7 @@
     Foods
   </top-section>
 
-  <content-section :categories="allCategories" :cards="data">
-    choose how you foods
-  </content-section>
+  <content-section :categories="categories" :cards="data"> choose how you foods </content-section>
 
   <my-pagination @page="page = $event" :limit="limit" :totalCount="totalCount"></my-pagination>
   <description-section v-bind="descriptionsAttr"></description-section>
@@ -16,17 +14,17 @@
 
 <script setup lang="ts">
 import { useFetchData } from '@/composables/useFetchData'
+import { useFetchCategories } from '@/composables/useFetchCategories'
 import MyPagination from '@/components/MyPagination.vue'
 import { ref, computed, onMounted } from 'vue'
-import type { Ref } from 'vue'
+
 import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
 import DescriptionSection from '@/components/sections/DescriptionSection.vue'
 import descriptionsAttr from '@/constants/descriptionsAttr'
-import { FOODS } from '@/constants'
+import { FOODS, FOODS_CATEGORIES } from '@/constants'
 import { type CardsType } from '@/types/types'
 
-const allCategories = ref([])
 const limit = 6
 const page = ref(1)
 const category = ref('')
@@ -39,27 +37,9 @@ const queryParams = computed(() =>
   }).toString()
 )
 
-const { data, totalCount, loading, error, fetchData } = useFetchData<CardsType>(
-  FOODS,
-  queryParams
-)
+const { data, totalCount, loading, error, fetchData } = useFetchData<CardsType>(FOODS, queryParams)
 
-async function getCategories(url: string) {
-  try {
-    const response = await fetch(`${url}/categories`)
-    if (!response.ok) throw new Error('Ошибка загрузки категорий')
-
-    allCategories.value = await response.json()
-  } catch (err) {
-    console.error('Ошибка при загрузке категорий:', err)
-  }
-}
-
-onMounted(() => {
-  getCategories(FOODS)
-})
-
-
+const { categories } = useFetchCategories<string>(`${FOODS_CATEGORIES}`)
 </script>
 
 <style scoped>

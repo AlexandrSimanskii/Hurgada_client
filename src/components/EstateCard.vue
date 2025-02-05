@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import MyCarousel from '@/components/MyCarousel.vue'
+import MyCarousel from '@/components/sliders/MyCarousel.vue'
 import CardIcons from './UI/CardIcons.vue'
 import CardCategory from './UI/CardCategory.vue'
 import { type EstateCardType } from '@/types/types'
@@ -75,7 +75,11 @@ const { name, images, description, price, area, bathroom, beds, rating, location
   font-weight: 500;
 }
 .price__span {
+  text-transform: uppercase;
   color: rgb(118, 154, 186);
+}
+.buttons {
+  display: flex;
 }
 .button {
   margin-right: 20px;

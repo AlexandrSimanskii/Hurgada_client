@@ -24,7 +24,7 @@ const props = defineProps({
   height: 520px;
   width: 100%;
   background-repeat: no-repeat;
-  background-size: contai;
+  background-size: contain;
 }
 .text {
   position: absolute;

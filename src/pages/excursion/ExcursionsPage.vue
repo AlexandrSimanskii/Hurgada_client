@@ -3,9 +3,9 @@
     class="top"
     :img="'https://firebasestorage.googleapis.com/v0/b/hurghada-7bbca.appspot.com/o/excursions%2Fsecond_photo.png?alt=media&token=20b903a4-e534-4e48-bb27-fb8dea7c965f'"
   >
-    Foods</top-section
+    Excursion</top-section
   >
-  <content-section :categories="categories" :cards="data">choose how you fexdfsdf</content-section>
+  <content-section :categories="categories" :cards="data">Choose you apartment</content-section>
   <my-pagination @page="page = $event" :limit="limit" :totalCount="totalCount"></my-pagination>
 
   <!-- <description-section></description-section> -->
@@ -21,7 +21,7 @@ import type { Ref } from 'vue'
 import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
 import DescriptionSection from '@/components/sections/DescriptionSection.vue'
-import { EXCURSION } from '@/constants'
+import { EXCURSION,EXCURSION_CATEGORIES } from '@/constants'
 
 import { type CardsType } from '@/types/types'
 
@@ -37,12 +37,16 @@ const queryParams = computed(() =>
   }).toString()
 )
 
-const { categories } = useFetchCategories<string>(`${EXCURSION}/categories`)
+const { categories } = useFetchCategories<string>(`${EXCURSION_CATEGORIES}`)
 
 const { data, totalCount, loading, error, fetchData } = useFetchData<CardsType>(
   EXCURSION,
   queryParams
 )
+
+
+
+
 </script>
 
 <style scoped></style>

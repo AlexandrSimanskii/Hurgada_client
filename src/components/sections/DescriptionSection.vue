@@ -52,7 +52,7 @@ const props = defineProps<{
 }
 
 .list-element::marker {
-  color: red; /* Цвет маркера */
-  font-size: 1.2em; /* Изменение размера */
+  color: var(--primaryMain); 
+  font-size: 1.2em; 
 }
 </style>

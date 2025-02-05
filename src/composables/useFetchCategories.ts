@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { watchEffect, ref } from 'vue'
 
 export function useFetchCategories<T>(url: string) {
   const categories = ref<T[]>([])
@@ -20,7 +20,7 @@ export function useFetchCategories<T>(url: string) {
     }
   }
 
-  onMounted(fetchData)
+  watchEffect(fetchData)
 
   return { categories }
 }

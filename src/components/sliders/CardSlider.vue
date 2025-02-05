@@ -1,23 +1,21 @@
 <template>
-  <!-- Slider main container -->
-  <div class="swiper">
-    <!-- Additional required wrapper -->
+  <div class="swiper cardSwiper">
     <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div
-        class="swiper-slide"
-        v-for="image of props.images"
-        :style="{ backgroundImage: `url(${image})` }"
-      ></div>
-
-  
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      <div class="swiper-slide">Slide 4</div>
+      <div class="swiper-slide">Slide 5</div>
+      <div class="swiper-slide">Slide 6</div>
+      <div class="swiper-slide">Slide 7</div>
+      <div class="swiper-slide">Slide 8</div>
+      <div class="swiper-slide">Slide 9</div>
     </div>
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
 
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev button"></div>
-    <div class="swiper-button-next button"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+
+    <div class="swiper-pagination"></div>
   </div>
 </template>
 
@@ -29,14 +27,10 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { onMounted } from 'vue'
 
-const props = defineProps<{
-  images: string[]
-}>()
-
 onMounted(() => {
-  new Swiper('.swiper', {
+  new Swiper('.cardSwiper', {
     modules: [Navigation, Pagination],
-    speed: 400,
+    cssMode: true,
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev'
@@ -46,7 +40,7 @@ onMounted(() => {
       clickable: true
     },
     autoplay: {
-      delay: 1000
+      delay: 100
     },
     loop: true
   })
@@ -54,10 +48,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-@import '@/assets/style/main';
 .swiper {
   width: 100%;
-  height: 100%;
+
 }
 
 .swiper-slide {
@@ -75,20 +68,22 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
 }
-.swiper-pagination-bullet {
-  border-radius: 1px !important;
+
+.cardSwiper .swiper-button-next,
+.cardSwiper .swiper-button-prev {
+  top: 100%;
+  transform: translateY(-110%);
+  border-radius: 50%;
+  padding: 20px;
+  background-color: aliceblue;
 }
+
+
 .swiper {
   --swiper-navigation-size: 14px;
   --swiper-pagination-bullet-inactive-opacity: 0.7;
   --swiper-pagination-bullet-inactive-color: #ffffff;
   --swiper-navigation-color: var(--primaryMain);
   --swiper-pagination-color: var(--primaryMain);
-}
-
-.button {
-  border-radius: 50%;
-  padding: 20px;
-  background-color: aliceblue;
 }
 </style>

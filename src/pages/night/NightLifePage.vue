@@ -5,7 +5,7 @@
   >
     Night life</top-section
   >
-  <content-section :categories="allCategories" :cards="data"
+  <content-section :categories="categories" :cards="data"
     >choose how you want to spend the night</content-section
   >
   <my-pagination
@@ -24,12 +24,11 @@ import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
 import MyPagination from '@/components/MyPagination.vue'
 import DescriptionSection from '@/components/sections/DescriptionSection.vue'
-import { NIGHTS } from '@/constants'
+import { NIGHTS, NIGHTS_CATEGORIES } from '@/constants'
 import { type CardsType } from '@/types/types'
 import { ref, computed } from 'vue'
-import type { Ref } from 'vue'
+import { useFetchCategories } from '@/composables/useFetchCategories'
 
-const allCategories = ref([])
 const limit = 6
 const page = ref(1)
 const category = ref('')
@@ -44,18 +43,7 @@ const queryParams = computed(() =>
 
 const { data, totalCount, loading, error, fetchData } = useFetchData<CardsType>(NIGHTS, queryParams)
 
-async function getCategories(url: string) {
-  try {
-    const fetchCategory = await fetch(`${url}/categories`)
-
-    allCategories.value = await fetchCategory.json()
-  } catch (error) {
-    console.log(error)
-  }
-}
-getCategories(NIGHTS)
-
-
+const { categories } = useFetchCategories<string>(`${NIGHTS_CATEGORIES}`)
 </script>
 
 <style scoped>

@@ -95,7 +95,7 @@ const heandlerClickList = (e: Event, list: string[]) => {
   decorationLeft.value = `${left - (navigationLeft || 0)}px`
   decorationWidth.value = `${width}px`
 
-  router.push(list[1])
+  router.push(`/${list[1]}`)
 
   const storage = {
     activeLink: list[0],

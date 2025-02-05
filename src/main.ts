@@ -45,6 +45,12 @@ const MyPreset = definePreset(Aura, {
           selected: { color: 'white', background: '#ff703e' }
         }
       }
+    },
+    rating: {
+      iconSize: { width: '40px' },
+      iconColor: {
+        backgroundColor: 'teal'
+      }
     }
   }
 })

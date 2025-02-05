@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import MyToast from '@/components/MyToast.vue'
+
 </script>
 
 <style lang="scss" scoped>

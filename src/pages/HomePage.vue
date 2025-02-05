@@ -2,11 +2,35 @@
   <main>
     <top-section />
     <div class="content container"></div>
-    <cards-section :name="'Things To Do in Hurghada'" :link="'/excursions'">
-      <card-app v-for="card of thinkToDoCards" :card="card"></card-app
+
+    <cards-section
+      v-if="thinkToDoCards.length"
+      :name="'Things To Do in Hurghada'"
+      :link="'/excursions'"
+    >
+      <card-app
+        @click="
+          (e) => {
+            handleClick(e, card._id, 'excursions')
+          }
+        "
+        v-for="card of thinkToDoCards"
+        :card="card"
+        :key="card._id"
+      ></card-app
     ></cards-section>
-    <cards-section :name="'Hurghada night life'" :link="'/nightlife'">
-      <card-app v-for="card of nightCards" :card="card"></card-app
+
+    <cards-section v-if="nightCards.length" :name="'Hurghada night life'" :link="'/nightlife'">
+      <card-app
+        @click="
+          (e: MouseEvent) => {
+            handleClick(e, card._id, 'nightlife')
+          }
+        "
+        v-for="card of nightCards"
+        :card="card"
+        :key="card._id"
+      ></card-app
     ></cards-section>
 
     <div class="partners container">
@@ -17,11 +41,20 @@
       </div>
     </div>
 
-    <cards-section :name="'FOOD & DINING GUIDE In Hurghada'" :link="'/'">
-      <card-app v-for="card of foodCards" :card="card"></card-app
+    <cards-section v-if="foodCards.length" :name="'FOOD & DINING GUIDE In Hurghada'" :link="'/'">
+      <card-app
+        @click="
+          (e: MouseEvent) => {
+            handleClick(e, card._id, 'foodguide')
+          }
+        "
+        :key="card._id"
+        v-for="card of foodCards"
+        :card="card"
+      ></card-app
     ></cards-section>
 
-    <div class="estate container">
+    <div v-if="estateCards.length" class="estate container">
       <h5>REAL ESTATE in Hurghada</h5>
       <div class="estate__cards">
         <estate-card v-for="estate of estateCards" :estate="estate"></estate-card>
@@ -41,6 +74,7 @@ import { BASE_URL } from '@/constants'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { type CardsType, type EstateCardType } from '@/types/types'
+import router from '@/router'
 
 const thinkToDoCards: Ref<CardsType[]> = ref([])
 const foodCards: Ref<CardsType[]> = ref([])
@@ -49,9 +83,10 @@ const estateCards: Ref<EstateCardType[]> = ref([])
 
 const getThinkToDoCards = async () => {
   try {
-    const data = await fetch(`${BASE_URL}excursions/get`)
-    const cards = await data.json()
-    thinkToDoCards.value = cards
+    const newData = await fetch(`${BASE_URL}excursions/get`)
+    const cards = await newData.json()
+
+    thinkToDoCards.value = cards.data
   } catch (error) {
     console.log("Ошибка при получении 'ThinkToDoCards'")
   }
@@ -83,6 +118,12 @@ const getEstateCards = async () => {
     console.log('Ошибка при получении Estate')
   }
 }
+const handleClick = (e: MouseEvent, id: string, path: string) => {
+  const target = e.target as HTMLElement
+  if (target.dataset.icon) return
+
+  router.push(`/${path}/${id}`)
+}
 
 getFoodCards()
 getThinkToDoCards()
@@ -109,5 +150,4 @@ getEstateCards()
   flex-direction: column;
   gap: 30px;
 }
-
 </style>
