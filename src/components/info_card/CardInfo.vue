@@ -1,7 +1,7 @@
 <template>
   <div class="card" v-if="card?._id">
-    <excursion-carousel class="slide" v-if="isExcursionPage"></excursion-carousel>
-    <card-slider class="slide" v-else></card-slider>
+    <excursion-carousel :slides="slides" class="slide" v-if="isExcursionPage"></excursion-carousel>
+    <card-slider :slides="slides" class="slide" v-else></card-slider>
     <div class="card-info">
       <h3 class="info__title">{{ card.name }}</h3>
       <div v-if="isExcursionPage" class="rating">
@@ -60,6 +60,7 @@ import { computed, ref } from 'vue'
 const props = defineProps<{
   card: CardsType
   page?: string
+  slides: string[]
 }>()
 
 const isExcursionPage = computed(() => {

@@ -10,7 +10,7 @@
   >
   <my-pagination
     class="a"
-    @page="page = $event"
+    @page="curentPage = $event"
     :limit="limit"
     :totalCount="totalCount"
   ></my-pagination>
@@ -30,13 +30,13 @@ import { ref, computed } from 'vue'
 import { useFetchCategories } from '@/composables/useFetchCategories'
 
 const limit = 6
-const page = ref(1)
+const curentPage = ref(1)
 const category = ref('')
 
 const queryParams = computed(() =>
   new URLSearchParams({
     limit: String(limit),
-    page: String(page.value),
+    page: String(curentPage.value),
     category: category.value
   }).toString()
 )

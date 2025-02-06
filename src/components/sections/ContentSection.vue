@@ -17,7 +17,12 @@
   </div>
 
   <div class="cards container">
-    <card-app v-for="card of props.cards" :card="card" :key="card._id"></card-app>
+    <card-app
+      v-for="card of props.cards"
+      @click="(e) => useCardClickHandler(e, card._id, path)"
+      :card="card"
+      :key="card._id"
+    ></card-app>
   </div>
   <div class="pagination"></div>
 </template>
@@ -25,6 +30,11 @@
 <script setup lang="ts">
 import CardApp from '../CardApp.vue'
 import type { CardsType } from '@/types/types'
+import { useCardClickHandler } from '@/composables/useCardClickHandler'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const path = route.path
 
 const props = defineProps<{
   cards: CardsType[]

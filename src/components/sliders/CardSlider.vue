@@ -1,15 +1,11 @@
 <template>
   <div class="swiper cardSwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-      <div class="swiper-slide">Slide 9</div>
+      <div
+        v-for="slide of slides"
+        class="swiper-slide"
+        :style="{ backgroundImage: `url(${slide})` }"
+      ></div>
     </div>
 
     <div class="swiper-button-next"></div>
@@ -45,12 +41,15 @@ onMounted(() => {
     loop: true
   })
 })
+
+const props = defineProps<{
+  slides: string[]
+}>()
 </script>
 
 <style scoped>
 .swiper {
   width: 100%;
-
 }
 
 .swiper-slide {
@@ -60,6 +59,8 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .swiper-slide img {
@@ -77,7 +78,6 @@ onMounted(() => {
   padding: 20px;
   background-color: aliceblue;
 }
-
 
 .swiper {
   --swiper-navigation-size: 14px;

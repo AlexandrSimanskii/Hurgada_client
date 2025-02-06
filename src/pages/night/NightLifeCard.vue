@@ -4,8 +4,13 @@
     >DuPort Pool Club El Gounain
   </top-section>
   <div class="container">
-    <card-info class="info" v-if="card?._id" :card="card"></card-info>
-    <reviews-section></reviews-section>
+    <card-info :slides="slides" class="info" v-if="card?._id" :card="card"></card-info>
+    <reviews-section
+      v-if="card?._id"
+      :title="card.name"
+      :reviews="card.reviews"
+      :rating="card.rating"
+    ></reviews-section>
   </div>
 </template>
 
@@ -13,8 +18,9 @@
 import TopSection from '@/components/sections/TopSection.vue'
 import CardInfo from '@/components/info_card/CardInfo.vue'
 import ReviewsSection from '@/components/info_card/ReviewsSection.vue'
+import nightImages from '@/constants/nightImages'
 import { type CardsType } from '@/types/types'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useFetchCard } from '@/composables/useFetchCard'
 import { useRoute } from 'vue-router'
 import { NIGHTS } from '@/constants'
@@ -23,10 +29,16 @@ const route = useRoute()
 const id = ref(`${NIGHTS}/${route.params.id}` as string)
 
 const { loading, error, card } = useFetchCard<CardsType>(id)
+
+const slides = computed(() => {
+  const slide = []
+  if (card.value?.images) slide.push(card.value?.images)
+  return slide.concat(nightImages)
+})
 </script>
 
 <style scoped>
 .info {
-  margin-bottom: 80px;
+  margin: 80px 0;
 }
 </style>

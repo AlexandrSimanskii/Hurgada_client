@@ -1,28 +1,15 @@
 <template>
   <div class="slider">
-    <!-- Основной слайдер -->
     <div
       style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
       class="swiper main-swiper"
     >
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+        <div v-for="slide of slides" class="swiper-slide">
+          <img class="slide-image" :src="slide" />
         </div>
       </div>
-      <!-- Кнопки навигации -->
+
       <div class="swiper-button-next button"></div>
       <div class="swiper-button-prev button"></div>
     </div>
@@ -30,20 +17,8 @@
     <!-- Слайдер миниатюр -->
     <div class="swiper thumbnail-swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+        <div v-for="slide of slides" class="swiper-slide">
+          <img :src="slide" />
         </div>
       </div>
     </div>
@@ -51,7 +26,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
+import excursionsForSlider from '@/constants/excursionImages'
 import Swiper from 'swiper'
 import { Navigation, Thumbs, FreeMode } from 'swiper/modules'
 import 'swiper/css'
@@ -59,8 +35,11 @@ import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 import 'swiper/css/free-mode'
 
+const props = defineProps<{
+  slides: string[]
+}>()
+
 onMounted(() => {
-  // Инициализация слайдера миниатюр
   const thumbsSwiper = new Swiper('.thumbnail-swiper', {
     modules: [FreeMode, Thumbs],
     spaceBetween: 10,
@@ -69,7 +48,6 @@ onMounted(() => {
     watchSlidesProgress: true
   })
 
-  // Инициализация основного слайдера
   new Swiper('.main-swiper', {
     modules: [Navigation, Thumbs],
     loop: true,

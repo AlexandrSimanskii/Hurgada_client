@@ -5,14 +5,16 @@
   >
     Excursion</top-section
   >
-  <content-section :categories="categories" :cards="data">Choose you apartment</content-section>
+  <div ref="content" class="content-wrapper">
+    <content-section :categories="categories" :cards="data">Choose you apartment</content-section>
+  </div>
   <my-pagination @page="page = $event" :limit="limit" :totalCount="totalCount"></my-pagination>
 
   <!-- <description-section></description-section> -->
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useFetchData } from '@/composables/useFetchData'
 import { useFetchCategories } from '@/composables/useFetchCategories'
 import MyPagination from '@/components/MyPagination.vue'
@@ -21,13 +23,14 @@ import type { Ref } from 'vue'
 import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
 import DescriptionSection from '@/components/sections/DescriptionSection.vue'
-import { EXCURSION,EXCURSION_CATEGORIES } from '@/constants'
+import { EXCURSION, EXCURSION_CATEGORIES } from '@/constants'
 
 import { type CardsType } from '@/types/types'
 
 const limit = 6
 const page = ref(1)
 const category = ref('')
+const content = ref(null)
 
 const queryParams = computed(() =>
   new URLSearchParams({
@@ -44,9 +47,13 @@ const { data, totalCount, loading, error, fetchData } = useFetchData<CardsType>(
   queryParams
 )
 
-
-
-
+watch([page], () => {
+  const el = content.value as HTMLElement | null
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY + 120
+    window.scrollTo({ top, behavior: 'smooth' })
+  }
+})
 </script>
 
 <style scoped></style>

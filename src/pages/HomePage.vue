@@ -45,7 +45,7 @@
       <card-app
         @click="
           (e: MouseEvent) => {
-            handleClick(e, card._id, 'foodguide')
+            useCardClickHandler(e, card._id, 'foodguide')
           }
         "
         :key="card._id"
@@ -73,6 +73,7 @@ import EstateCard from '@/components/EstateCard.vue'
 import { BASE_URL } from '@/constants'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
+import { useCardClickHandler } from '@/composables/useCardClickHandler'
 import { type CardsType, type EstateCardType } from '@/types/types'
 import router from '@/router'
 
@@ -123,6 +124,7 @@ const handleClick = (e: MouseEvent, id: string, path: string) => {
   if (target.dataset.icon) return
 
   router.push(`/${path}/${id}`)
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 getFoodCards()

@@ -4,7 +4,7 @@ export type CardsType = {
   images: string
   category?: string
   description: string
-  reviews: object
+  reviews: []
   rating: number
   location: string
 

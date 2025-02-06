@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-paginator" v-if="localTotalCount>limit">
+  <div ref="paginator" class="custom-paginator" v-if="localTotalCount > limit">
     <div class="show-more">
       <my-button class="icon" :image="updateIcon" @click="onShowMore"> Show more </my-button>
     </div>
@@ -18,16 +18,17 @@
 
 <script setup lang="ts">
 import updateIcon from '@/assets/images/icons/update.svg'
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, onMounted } from 'vue'
 import Paginator from 'primevue/paginator'
 import MyButton from './UI/MyButton.vue'
 
-const emit = defineEmits(['page'])
 const props = defineProps<{
   limit: number
-
   totalCount: number
 }>()
+
+const paginator = ref(null)
+const emit = defineEmits(['page'])
 
 const { limit, totalCount } = props
 const localTotalCount = ref(totalCount)
@@ -51,6 +52,7 @@ const onPageChange = (event: { first: number }) => {
   first.value = event.first
   emit('page', first.value)
 }
+
 </script>
 
 <style>
