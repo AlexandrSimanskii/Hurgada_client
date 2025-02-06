@@ -10,7 +10,7 @@
   </div>
   <my-pagination @page="page = $event" :limit="limit" :totalCount="totalCount"></my-pagination>
 
-  <!-- <description-section></description-section> -->
+  <description-section :descriptionsAttr="descriptionsAttr"></description-section>
 </template>
 
 <script setup lang="ts">
@@ -18,7 +18,7 @@ import { ref, computed, watch } from 'vue'
 import { useFetchData } from '@/composables/useFetchData'
 import { useFetchCategories } from '@/composables/useFetchCategories'
 import MyPagination from '@/components/MyPagination.vue'
-
+import descriptionsAttr from '@/constants/descriptionsAttr'
 import type { Ref } from 'vue'
 import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
