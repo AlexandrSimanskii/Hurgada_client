@@ -37,7 +37,9 @@
       </p>
 
       <div class="info__btns">
-        <my-button :image="CalendarCheck" class="buttonColored">Book now</my-button>
+        <my-button @click="showModal()" :image="CalendarCheck" class="buttonColored"
+          >Book now</my-button
+        >
         <my-button class="info-btn" :image="PhoneCall"></my-button>
         <my-button class="info-btn" :image="Message"></my-button>
       </div>
@@ -62,6 +64,12 @@ const props = defineProps<{
   page?: string
   slides: string[]
 }>()
+
+const emit = defineEmits(['showModal'])
+
+function showModal() {
+  emit('showModal')
+}
 
 const isExcursionPage = computed(() => {
   return props.page === 'excursion'

@@ -4,7 +4,13 @@
     >DuPort Pool Club El Gounain
   </top-section>
   <div class="container">
-    <card-info :slides="slides" class="info" v-if="card?._id" :card="card"></card-info>
+    <card-info
+      :slides="slides"
+      class="info"
+      v-if="card?._id"
+      :card="card"
+      @show-modal="showModal"
+    ></card-info>
     <reviews-section
       v-if="card?._id"
       :title="card.name"
@@ -12,13 +18,18 @@
       :rating="card.rating"
     ></reviews-section>
   </div>
+  <side-bar @clickClose="hideModal"> <form-book></form-book></side-bar>
 </template>
 
 <script setup lang="ts">
 import TopSection from '@/components/sections/TopSection.vue'
 import CardInfo from '@/components/info_card/CardInfo.vue'
 import ReviewsSection from '@/components/info_card/ReviewsSection.vue'
+import FormBook from '@/components/FormBook.vue'
 import nightImages from '@/constants/nightImages'
+import { useModal } from '@/composables/useModal'
+import SideBar from '@/components/SideBar.vue'
+import { useSidebarStore } from '@/stores/sidebarStore'
 import { type CardsType } from '@/types/types'
 import { ref, computed } from 'vue'
 import { useFetchCard } from '@/composables/useFetchCard'
@@ -35,6 +46,8 @@ const slides = computed(() => {
   if (card.value?.images) slide.push(card.value?.images)
   return slide.concat(nightImages)
 })
+
+const { isModal, showModal, hideModal } = useModal()
 </script>
 
 <style scoped>

@@ -2,11 +2,13 @@
 import { RouterView } from 'vue-router'
 import HeaderApp from './components/HeaderApp.vue'
 import FooterApp from './components/FooterApp.vue'
+import SignIn from './components/SignIn.vue'
 </script>
 
 <template>
   <div class="wrapper">
     <header-app></header-app>
+    <sign-in />
     <main class="main"><RouterView /></main>
     <footer-app></footer-app>
   </div>

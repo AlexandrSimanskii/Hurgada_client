@@ -5,25 +5,26 @@
   >
     Excursion</top-section
   >
+
+
   <div ref="content" class="content-wrapper">
     <content-section :categories="categories" :cards="data">Choose you apartment</content-section>
   </div>
   <my-pagination @page="page = $event" :limit="limit" :totalCount="totalCount"></my-pagination>
 
   <description-section :descriptionsAttr="descriptionsAttr"></description-section>
-  <div class="shadow">
-   <form-book></form-book>
-  </div>
+
+ 
 </template>
 
 <script setup lang="ts">
-
 import { ref, computed, watch } from 'vue'
 import { useFetchData } from '@/composables/useFetchData'
 import { useFetchCategories } from '@/composables/useFetchCategories'
 import MyPagination from '@/components/MyPagination.vue'
 import descriptionsAttr from '@/constants/descriptionsAttr'
-import FormBook from '@/components/FormBook.vue'
+
+
 import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
 import DescriptionSection from '@/components/sections/DescriptionSection.vue'
@@ -59,32 +60,12 @@ watch([page], () => {
     window.scrollTo({ top, behavior: 'smooth' })
   }
 })
+
+
 </script>
 
 <style scoped>
-.shadow {
-  position: fixed;
-  z-index: 5;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.sidebar {
-  position: absolute;
-  z-index: 10;
-  top: 0;
-  right: 0;
-  width: 340px;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-}
-.text {
-  display: flex;
-}
+
+
+
 </style>

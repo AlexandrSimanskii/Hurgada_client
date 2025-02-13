@@ -7,6 +7,7 @@
   <div class="container">
     <bread-crumbs></bread-crumbs>
     <card-info
+      @show-modal="showModal"
       :slides="slides"
       class="info"
       v-if="card?._id"
@@ -20,14 +21,20 @@
       :rating="card.rating"
     ></reviews-section>
   </div>
+
+  <side-bar v-if="store.isOpen" @clickClose="hideModal"> <form-book></form-book></side-bar>
 </template>
 
 <script setup lang="ts">
 import TopSection from '@/components/sections/TopSection.vue'
 import BreadCrumbs from '@/components/BreadCrumbs.vue'
 import CardInfo from '@/components/info_card/CardInfo.vue'
+import FormBook from '@/components/FormBook.vue'
 import ReviewsSection from '@/components/info_card/ReviewsSection.vue'
 import excursionImages from '@/constants/excursionImages'
+import SideBar from '@/components/SideBar.vue'
+import { useSidebarStore } from '@/stores/sidebarStore'
+import { useModal } from '@/composables/useModal'
 import { type CardsType } from '@/types/types'
 import { computed, ref, watch } from 'vue'
 import { useFetchCard } from '@/composables/useFetchCard'
@@ -35,6 +42,7 @@ import { useRoute } from 'vue-router'
 import { EXCURSION } from '@/constants'
 
 const route = useRoute()
+const store = useSidebarStore()
 const id = ref(`${EXCURSION}/${route.params.id}` as string)
 
 const { loading, error, card } = useFetchCard<CardsType>(id)
@@ -45,10 +53,13 @@ const slides = computed(() => {
 
   return slide.concat(excursionImages)
 })
+
+const { showModal, hideModal } = useModal()
 </script>
 
 <style scoped>
 @import '@/assets/style/variable.css';
+
 .top-section {
   color: var(--primaryHeader);
 }
