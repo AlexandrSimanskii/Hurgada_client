@@ -25,7 +25,6 @@
       {{ temperature }}C
     </div>
     <ul class="icons">
-      <li class="icons__el"><img src="/src/assets/images/icons/search.svg" /></li>
       <li class="icons__el" @click="$emit('showModal', 'signIn')">
         <img src="/src/assets/images/icons/user.svg" />
       </li>
