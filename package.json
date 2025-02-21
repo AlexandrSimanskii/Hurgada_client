@@ -20,7 +20,7 @@
     "swiper": "^11.1.14",
     "vee-validate": "^4.15.0",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3",
+    "vue-router": "^4.3.3"
     
   },
   "devDependencies": {
