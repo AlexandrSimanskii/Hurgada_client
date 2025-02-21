@@ -93,7 +93,6 @@
     Thanks for Your application
     <p>Our manager will contact you</p>
   </div>
-  >
 </template>
 
 <script setup lang="ts">
@@ -101,9 +100,10 @@ import { onMounted, ref, computed } from 'vue'
 import InputText from 'primevue/inputtext'
 import Select from 'primevue/select'
 import DatePicker from 'primevue/datepicker'
-
+import { useSidebarStore } from '@/stores/sidebarStore'
 import CalendarCheck from '@/assets/images/icons/CalendarCheck.svg'
 
+const store = useSidebarStore()
 const name = ref('')
 const date = ref()
 const selectedCity = ref()
@@ -127,20 +127,20 @@ const languages = ref([
 
 const emit = defineEmits(['hideModal'])
 
-function hideModal() {
-  emit('hideModal')
-}
 function formSubmit() {
   isSubmit.value = false
-  const el = document.querySelector('.sidebar')
-  el.style.height = `${document.body.getBoundingClientRect().height}px`
-  setTimeout(hideModal, 3000)
+  const el: HTMLElement | null = document.querySelector('.sidebar')
+  if (el) {
+    el.style.height = `${document.body.getBoundingClientRect().height}px`
+
+    // if (store.isOpen) setTimeout(store.toggle, 3000)
+  }
 }
 
 onMounted(() => {
   const inputs = document.querySelectorAll('.p-inputtext')
   inputs.forEach((el) => {
-    el.style.border = 'none'
+    ;(el as HTMLElement).style.border = 'none'
   })
 
   const el = document.querySelector('.sidebar')

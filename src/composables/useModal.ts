@@ -6,13 +6,12 @@ export function useModal() {
 
   function showModal() {
     store.toggle()
-
     document.body.style.overflow = 'hidden'
   }
 
   function hideModal() {
     store.toggle()
-   
+
     document.body.style.overflow = ''
   }
 

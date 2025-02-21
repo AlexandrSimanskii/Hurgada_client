@@ -17,7 +17,7 @@
     :rating="card.rating"
   ></reviews-section>
 
-  <side-bar  @clickClose="hideModal"> <form-book></form-book></side-bar>
+  <side-bar v-if="store.isOpen" @clickClose="hideModal"> <form-book></form-book></side-bar>
 </template>
 
 <script setup lang="ts">

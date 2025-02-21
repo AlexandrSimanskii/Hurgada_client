@@ -18,7 +18,7 @@
       :rating="card.rating"
     ></reviews-section>
   </div>
-  <side-bar @clickClose="hideModal"> <form-book></form-book></side-bar>
+  <side-bar v-if="store.isOpen" @clickClose="hideModal"> <form-book></form-book></side-bar>
 </template>
 
 <script setup lang="ts">
@@ -38,7 +38,7 @@ import { NIGHTS } from '@/constants'
 
 const route = useRoute()
 const id = ref(`${NIGHTS}/${route.params.id}` as string)
-
+const store = useSidebarStore()
 const { loading, error, card } = useFetchCard<CardsType>(id)
 
 const slides = computed(() => {
@@ -47,7 +47,7 @@ const slides = computed(() => {
   return slide.concat(nightImages)
 })
 
-const { isModal, showModal, hideModal } = useModal()
+const { showModal, hideModal } = useModal()
 </script>
 
 <style scoped>

@@ -25,9 +25,13 @@
       {{ temperature }}C
     </div>
     <ul class="icons">
-      <li class="icons__el"><img src="/src/assets/images/icons/search.png" /></li>
-      <li class="icons__el"><img src="/src/assets/images/icons/user.png" /></li>
-      <li class="icons__el"><img src="/src/assets/images/icons/menu.png" /></li>
+      <li class="icons__el"><img src="/src/assets/images/icons/search.svg" /></li>
+      <li class="icons__el" @click="$emit('showModal', 'signIn')">
+        <img src="/src/assets/images/icons/user.svg" />
+      </li>
+      <li class="icons__el" @click="$emit('showModal', 'menu')">
+        <img src="/src/assets/images/icons/Menu.svg" />
+      </li>
     </ul>
     <div class="language">
       En
@@ -40,6 +44,11 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
+import navList from '@/constants/navlist'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useSidebarStore } from '@/stores/sidebarStore'
+
 const toast = useToast()
 
 const show = () => {
@@ -51,10 +60,9 @@ const show = () => {
   })
 }
 
-import navList from '@/constants/navlist'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+defineEmits(['showModal'])
 
+const store = useSidebarStore()
 const router = useRouter()
 const temperature = ref('')
 const activeLink = ref('')
@@ -153,6 +161,18 @@ function heandlerClickLogo() {
   padding: 0 30px;
   cursor: pointer;
 }
+
+.icons__el img {
+  transition: filter 0.3s;
+}
+
+.icons__el:hover img {
+  transform: scale(1.1);
+  filter: brightness(0) saturate(100%) invert(51%) sepia(89%) saturate(1447%) hue-rotate(333deg)
+    brightness(102%) contrast(103%);
+  transition: filter 0.3s;
+}
+
 .icons__el:not(:last-child) {
   border-right: 1px solid #616161;
 }

@@ -1,19 +1,19 @@
 <template>
-  <!-- Slider main container -->
+ 
   <div class="swiper">
-    <!-- Additional required wrapper -->
+   
     <div class="swiper-wrapper">
-      <!-- Slides -->
+    
       <div
         class="swiper-slide"
         v-for="image of props.images"
         :style="{ backgroundImage: `url(${image})` }"
       ></div>
     </div>
-    <!-- If we need pagination -->
+  
     <div class="swiper-pagination"></div>
 
-    <!-- If we need navigation buttons -->
+   
     <div class="swiper-button-prev button"></div>
     <div class="swiper-button-next button"></div>
   </div>

@@ -18,9 +18,10 @@
     "primevue": "^4.1.1",
     "sass": "^1.79.4",
     "swiper": "^11.1.14",
+    "vee-validate": "^4.15.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
-    "vuetify": "^3.7.9"
+    
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",

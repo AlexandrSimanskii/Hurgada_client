@@ -1,20 +1,16 @@
 <template>
-  <template v-if="store.isOpen">
-    <div class="shadow"></div>
-    <aside class="sidebar">
-      <button class="close-button" @click="$emit('clickClose')">
-        <img src="@/assets/images/icons/closed.svg" alt="Close" /></button
-      ><slot /></aside
-  ></template>
+  <div class="shadow"></div>
+  <aside class="sidebar">
+    <button class="close-button" @click="$emit('clickClose')">
+      <img src="@/assets/images/icons/closed.svg" alt="Close" /></button
+    ><slot />
+  </aside>
 </template>
 
 <script setup lang="ts">
-import { useSidebarStore } from '@/stores/sidebarStore'
 import { defineEmits } from 'vue'
 
-
 const emit = defineEmits(['clickClose'])
-const store = useSidebarStore()
 </script>
 
 <style scoped>
@@ -34,7 +30,7 @@ const store = useSidebarStore()
   z-index: 10;
   top: 0;
   right: 0;
-  width: 340px;
+  width: 470px;
   min-height: 100vh;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(3px);
