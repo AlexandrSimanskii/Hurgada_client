@@ -1,7 +1,6 @@
 <template>
   <main>
-    <top-section />
-    <div class="content container"></div>
+    <home-top />
 
     <cards-section
       v-if="thinkToDoCards.length"
@@ -65,9 +64,9 @@
 
 <script setup lang="ts">
 import partners from '@/constants/partners'
-import TopSection from '@/components/HomeTop.vue'
+import TopSection from '@/components/sections/TopSection.vue'
+import HomeTop from '@/components/home_page/HomeTop.vue'
 import CardApp from '@/components/CardApp.vue'
-
 import CardsSection from '@/components/CardsSection.vue'
 import EstateCard from '@/components/EstateCard.vue'
 import { BASE_URL } from '@/constants'

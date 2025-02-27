@@ -6,15 +6,12 @@
     Excursion</top-section
   >
 
-
   <div ref="content" class="content-wrapper">
     <content-section :categories="categories" :cards="data">Choose you apartment</content-section>
   </div>
   <my-pagination @page="page = $event" :limit="limit" :totalCount="totalCount"></my-pagination>
 
   <description-section :descriptionsAttr="descriptionsAttr"></description-section>
-
- 
 </template>
 
 <script setup lang="ts">
@@ -24,14 +21,12 @@ import { useFetchCategories } from '@/composables/useFetchCategories'
 import MyPagination from '@/components/MyPagination.vue'
 import descriptionsAttr from '@/constants/descriptionsAttr'
 
-
 import TopSection from '@/components/sections/TopSection.vue'
 import ContentSection from '@/components/sections/ContentSection.vue'
 import DescriptionSection from '@/components/sections/DescriptionSection.vue'
 
 import { EXCURSION, EXCURSION_CATEGORIES } from '@/constants'
 import { type CardsType } from '@/types/types'
-
 
 const limit = 6
 const page = ref(1)
@@ -60,12 +55,6 @@ watch([page], () => {
     window.scrollTo({ top, behavior: 'smooth' })
   }
 })
-
-
 </script>
 
-<style scoped>
-
-
-
-</style>
+<style scoped></style>

@@ -1,23 +1,13 @@
-const navList: {
-  'Thinks to do': string
-  Excursions: string
-  News: string
-  'Night life': string
-  'Food guide': string
-  'Real estate': string
-  Jobs: string
-  'Airport transfer': string
-  'Contact us': string
-} = {
-  'Thinks to do': '',
+const navList: Record<string, string> = {
+  'Thinks to do': 'think',
   Excursions: 'excursions',
-  News: '',
+  News: 'news',
   'Night life': 'nightlife',
   'Food guide': 'foodguide',
-  'Real estate': '',
-  Jobs: '',
-  'Airport transfer': '',
-  'Contact us': ''
+  'Real estate': 'realestate',
+  Jobs: 'jobs',
+  'Airport transfer': 'airport',
+  'Contact us': 'contacts'
 }
 
 export default navList

@@ -6,4 +6,6 @@ export function useCardClickHandler(e: MouseEvent, id: string, path: string) {
 
   router.push(`${path}/${id}`)
   window.scrollTo({ top: 0, behavior: 'smooth' })
+
+  
 }

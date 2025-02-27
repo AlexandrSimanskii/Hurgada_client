@@ -32,9 +32,9 @@ const emit = defineEmits(['clickClose'])
   right: 0;
   width: 470px;
   min-height: 100vh;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(216, 216, 218, 0.62);
+  backdrop-filter: blur(11.8px);
+  -webkit-backdrop-filter: blur(11.8px);
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
 }
