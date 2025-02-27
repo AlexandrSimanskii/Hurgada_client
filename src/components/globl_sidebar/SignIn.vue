@@ -59,7 +59,7 @@ const [confirmPassword, confirmPasswordAttrs] = defineField('confirm')
   color: var(--primaryMain);
 }
 .error {
-  color: var(--primaryMain);
+  color: red;
   font-size: 0.875rem;
   margin-top: -20px;
 }

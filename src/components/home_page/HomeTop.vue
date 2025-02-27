@@ -1,21 +1,18 @@
 <template>
   <section class="top-section">
     <div class="welcome">
-      <img class="welcome__content" src="/src/assets/images/image/title.svg" alt="" />
+      <img class="welcome__content" src="@/assets/images/image/title.svg" alt="" />
       <div class="play"></div>
     </div>
     <aside class="aside">
-      <ul class="aside__list">
-        <li><img src="/src/assets/images/icons/Facebook_white.png" alt="Facebook" /></li>
-        <li><img src="/src/assets/images/icons/Instagram_white.png" alt="Instagram" /></li>
-        <li><img src="/src/assets/images/icons/Twitter_white.png" alt="Twitter" /></li>
-        <li><img src="/src/assets/images/icons/Youtube_white.png" alt="Youtube" /></li>
-      </ul>
+      <social-block class="aside__list" />
     </aside>
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SocialBlock from './SocialBlock.vue';
+</script>
 
 <style scoped>
 @import '@/assets/style/main.css';

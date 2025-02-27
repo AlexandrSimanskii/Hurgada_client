@@ -1,22 +1,24 @@
 <template>
   <header class="header container">
-    <router-link to="/"
-      ><img
-        @click="heandlerClickLogo"
+    <router-link to="/">
+      <img
+        @click="handlerClickLogo"
         class="logo"
         src="/src/assets/images/image/hurghada.png"
         alt="hurghada"
-    /></router-link>
+      />
+    </router-link>
 
     <ul class="navigation">
       <li
+        v-for="[key, value] in Object.entries(navList)"
+        :data-name="key"
         class="navigation__el"
-        :class="list[0] == activeLink ? 'navigation__el--active' : ''"
-        v-for="list of Object.entries(navList)"
-        @click="(e) => heandlerClickList(e, list)"
-        :key="list[0]"
+        :class="key == activeLink ? 'navigation__el--active' : ''"
+        @click="(e) => handlerClickList(e, key, value)"
+        :key="key"
       >
-        {{ list[0] }}
+        {{ key }}
       </li>
       <li class="decoration" :style="{ left: decorationLeft, width: decorationWidth }"></li>
     </ul>
@@ -44,12 +46,12 @@
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
 import navList from '@/constants/navlist'
-import { ref } from 'vue'
+import { ref, nextTick, watchEffect, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useSidebarStore } from '@/stores/sidebarStore'
+import { storeToRefs } from 'pinia'
+import { useActiveLink } from '@/stores/activeLink'
 
 const toast = useToast()
-
 const show = () => {
   toast.add({
     severity: 'warn',
@@ -61,63 +63,86 @@ const show = () => {
 
 defineEmits(['showModal'])
 
-const store = useSidebarStore()
+const linkStore = useActiveLink()
 const router = useRouter()
 const temperature = ref('')
-const activeLink = ref('')
+const { active: activeLink } = storeToRefs(linkStore)
+const setLink = linkStore.setActive
 const decorationLeft = ref('0')
 const decorationWidth = ref('0')
-
 const rawHeader = sessionStorage.getItem('header')
-const storage = rawHeader ? JSON.parse(rawHeader) : ''
+const storage = rawHeader ? JSON.parse(rawHeader) : {}
 
-activeLink.value = storage.activeLink
-decorationLeft.value = storage.decorationLeft
-decorationWidth.value = storage.decorationWidth
+decorationLeft.value = storage.decorationLeft || '0'
+decorationWidth.value = storage.decorationWidth || '0'
 
-const getWheather = () => {
-  fetch(`https://api.weatherapi.com/v1/current.json?key=69ed7b91ab4b4d4f9f282327242604&q=Hurghada`)
-    .then((response) => response.json())
-    .then((data) => {
+const getWeather = async () => {
+  try {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=69ed7b91ab4b4d4f9f282327242604&q=Hurghada`
+    )
+    const data = await response.json()
+    if (data?.current?.temp_c !== undefined) {
       temperature.value = data.current.temp_c
-    })
-    .catch((error) => {
-      console.error(error)
-    })
+    } else {
+      console.error('Invalid weather API response', data)
+    }
+  } catch (error) {
+    console.error('Failed to fetch weather data:', error)
+  }
 }
-getWheather()
+getWeather()
 
-const heandlerClickList = (e: Event, list: string[]) => {
-  if (!list[1]) {
-    show()
-    return
+function setUnderLine() {
+  let element = document.querySelector(`[data-name="${activeLink.value}"]`)
+  if (!element) return
+
+  const elementCoords = element.getBoundingClientRect()
+  const width = elementCoords.width
+  const left = elementCoords.left
+  const navigation = document.querySelector('.navigation')
+  if (!navigation) return
+  const navigationCoords = navigation.getBoundingClientRect()
+  const navigationLeft = navigation ? navigationCoords.left : 0
+
+  if (elementCoords.bottom - navigationCoords.bottom > navigationCoords.height) {
+    return (decorationWidth.value = '0px')
   }
 
-  const target = e.target as HTMLElement
-  const targetCoords = target.getBoundingClientRect()
-  const width = targetCoords.width
-  const left = targetCoords.left
-  const navigationLeft = document.querySelector('.navigation')?.getBoundingClientRect().left
-  activeLink.value = list[0]
-  decorationLeft.value = `${left - (navigationLeft || 0)}px`
+  decorationLeft.value = `${left - navigationLeft}px`
   decorationWidth.value = `${width}px`
-
-  router.push(`/${list[1]}`)
-
-  const storage = {
-    activeLink: list[0],
-    decorationLeft: decorationLeft.value,
-    decorationWidth: decorationWidth.value
-  }
-
-  sessionStorage.setItem('header', JSON.stringify(storage))
 }
 
-function heandlerClickLogo() {
-  sessionStorage.setItem('header', '')
+const handlerClickList = async (e: Event, key: string, value: string) => {
+  // if (!value) {
+  //   show()
+  //   return
+  // }
+
+  setLink(key)
+  router.push(`/${value}`)
+
+  await nextTick()
+  sessionStorage.setItem(
+    'header',
+    JSON.stringify({
+      decorationLeft: decorationLeft.value,
+      decorationWidth: decorationWidth.value
+    })
+  )
+}
+
+function handlerClickLogo() {
+  sessionStorage.removeItem('header')
   decorationLeft.value = '0'
   decorationWidth.value = '0'
+  setLink('')
 }
+
+watch(activeLink, async () => {
+  await nextTick()
+  setUnderLine()
+})
 </script>
 
 <style scoped lang="css">
@@ -218,7 +243,7 @@ function heandlerClickLogo() {
 .decoration {
   transition-duration: 500ms;
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
   display: block;
 

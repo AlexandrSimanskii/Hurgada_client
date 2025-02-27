@@ -49,7 +49,7 @@ const router = createRouter({
       component: NewsPage
     },
     {
-      path: '/nightlife/:id',  // Исправлено
+      path: '/nightlife/:id', 
       name: 'nightlife-card',
       component: NightLifeCard
     },

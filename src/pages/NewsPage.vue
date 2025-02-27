@@ -1,32 +1,11 @@
 <template>
-  <div class="field">
-    <div class="boll"></div>
-  </div>
+  <top-section
+    :img="'https://firebasestorage.googleapis.com/v0/b/hurghada-7bbca.appspot.com/o/estate%2FAirport.jpg?alt=media&token=42363ab3-1e93-4a7d-9519-d756aea6f076'"
+  ></top-section>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-
-
+import TopSection from '@/components/sections/TopSection.vue'
 </script>
 
-<style scoped>
-.field {
-  border: 2px solid black;
-  margin: 0 auto;
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-color: aquamarine;
-}
-.boll {
-  border: 10px solid rebeccapurple;
-  padding: 20px;
-  position: absolute;
-  top: 300px;
-  left: 200px;
-  width: 100px;
-  height: 100px;
-  background-color: brown;
-}
-</style>
+<style scoped></style>

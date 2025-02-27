@@ -2,8 +2,8 @@
   <div class="register">
     <div @click="(e) => handlerBtnsClick(e)" class="btns">
       <button ref="prev" data-button="true" class="register-prev nav-btn">SignIn</button>
-      <button ref="nav" data-button="true" class="register-next nav-btn">SignUp</button>
-      <span class="under-nav"></span>
+      <button data-button="true" class="register-next nav-btn">SignUp</button>
+      <span ref="underLine" class="under-nav"></span>
     </div>
 
     <div class="swiper registerSwiper">
@@ -22,34 +22,39 @@
 <script setup lang="ts">
 import SignIn from './SignIn.vue'
 import SignUp from './SignUp.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, nextTick } from 'vue'
 import Swiper from 'swiper'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-const  nav =(ref)
+const prev = ref<HTMLElement | null>(null)
+const underLine = ref<HTMLElement | null>(null)
 
 const handlerBtnsClick = (e: MouseEvent) => {
   const element = e.target as HTMLElement | null
-  if (!element || !element.dataset.button) return
+  const btns = document.querySelector('.btns')?.getBoundingClientRect().left
 
-  console.log(element)
+  if (!element || !element.dataset.button) return
+  const coords = element.getBoundingClientRect()
+
+  if (underLine.value === null) return
+  underLine.value.style.width = `${coords.width}px`
+  underLine.value.style.left = `${coords.left - (btns || 0)}px`
 }
-onMounted(() => {
+onMounted(async () => {
   new Swiper('.registerSwiper', {
     modules: [Navigation],
     speed: 400,
     navigation: {
       nextEl: '.register-next',
       prevEl: '.register-prev'
-    },
-
-    autoplay: {
-      delay: 1000
     }
   })
+  await nextTick()
+  document.body.style.overflow = 'hidden'
+  underLine.value!.style.width = `${prev.value?.clientWidth}px`
 })
 </script>
 
@@ -91,6 +96,7 @@ form {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: aqua;
+  background-color: var(--primaryMain);
+  transition: all 0.3s ease;
 }
 </style>
