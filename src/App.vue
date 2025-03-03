@@ -2,7 +2,7 @@
   <div class="wrapper">
     <header-app @showModal="handleClick"></header-app>
     <side-bar v-if="isVisible" @click-close="handlerClose">
-      <GlobalMenu v-if="element === 'menu'" />
+      <GlobalMenu v-if="element === 'menu'" @close="isVisible = false" />
       <register-form v-if="element === 'signIn'"
     /></side-bar>
     <main class="main"><RouterView /></main>

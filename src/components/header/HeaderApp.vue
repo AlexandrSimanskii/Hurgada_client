@@ -15,7 +15,7 @@
         :data-name="key"
         class="navigation__el"
         :class="key == activeLink ? 'navigation__el--active' : ''"
-        @click="(e) => handlerClickList(e, key, value)"
+        @click="(e) => handlerClickList(e, key, value.link)"
         :key="key"
       >
         {{ key }}

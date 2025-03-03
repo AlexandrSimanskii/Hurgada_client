@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow"></div>
+  <div class="shadow" @click="$emit('clickClose')"></div>
   <aside class="sidebar">
     <button class="close-button" @click="$emit('clickClose')">
       <img src="@/assets/images/icons/closed.svg" alt="Close" /></button
