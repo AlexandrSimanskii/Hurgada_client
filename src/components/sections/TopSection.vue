@@ -45,4 +45,31 @@ const props = defineProps({
   text-transform: uppercase;
   transform: translateX(-3px);
 }
+
+@media (max-width: 640px) {
+  .text {
+
+  font-size: 20px;
+ 
+}
+.text-bottom {
+ 
+  font-size: 44px;
+  
+}
+
+}
+@media (max-width: 360px) {
+  .text {
+
+  font-size: 16px;
+ 
+}
+.text-bottom {
+ 
+  font-size: 36px;
+  
+}
+
+}
 </style>

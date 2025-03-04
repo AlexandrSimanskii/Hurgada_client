@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
-import HeaderApp from './components/header/HeaderApp.vue'
+import HeaderApp from './components/HeaderApp.vue'
 import FooterApp from './components/FooterApp.vue'
 import SideBar from './components/SideBar.vue'
 import RegisterForm from './components/globl_sidebar/RegisterForm.vue'

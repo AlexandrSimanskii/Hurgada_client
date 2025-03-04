@@ -19,6 +19,32 @@
       ></card-app
     ></cards-section>
 
+    <div class="new-section container">
+      <h3 class="title">Hurghada News</h3>
+      <div class="new-cards">
+        <new-card class="new-card" :image="'/images/image/news/new_1.jpg'">
+          <template #title
+            ><span class="first-title"
+              >Egypt- Hurghada receives 1st tourist group from Berlin</span
+            ></template
+          >
+          <template #subtitle
+            >Tourist Office of the Egyptian Tourism Promotion Board in Egypt's Red Sea coastal city
+            of Hurghada received...</template
+          >
+          12/20/2022 3:16:06 PM</new-card
+        >
+        <new-card class="new-card" :image="'/images/image/news/new_2.jpg'">
+          <template #title>Egyptian Red Sea province to ban single use plastics</template>
+          09/12/2022 2:42:10 PM</new-card
+        >
+        <new-card class="new-card" :image="'/images/image/news/new_3.jpg'">
+          <template #title>Development Lights Up Hurghada with the First Edition</template>
+          11/18/2022 6:12:01 PM</new-card
+        >
+      </div>
+    </div>
+
     <cards-section v-if="nightCards.length" :name="'Hurghada night life'" :link="'/nightlife'">
       <card-app
         @click="
@@ -64,7 +90,7 @@
 
 <script setup lang="ts">
 import partners from '@/constants/partners'
-import TopSection from '@/components/sections/TopSection.vue'
+import NewCard from '@/components/home_page/NewCard.vue'
 import HomeTop from '@/components/home_page/HomeTop.vue'
 import CardApp from '@/components/CardApp.vue'
 import CardsSection from '@/components/CardsSection.vue'
@@ -145,10 +171,46 @@ getEstateCards()
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 60px;
 }
 .estate__cards {
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+
+.new-cards {
+  height: 620px;
+  display: grid;
+
+  grid-template-columns: 3fr 2fr;
+
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+.title {
+  text-transform: uppercase;
+  font-size: 28px;
+  width: 500;
+  margin-bottom: 30px;
+}
+.first-title {
+  font-size: 32px;
+  font-weight: 600;
+}
+.new-card:first-child {
+  grid-row: span 2;
+}
+
+@media (max-width: 980px) {
+  .new-cards {
+    grid-template-columns: 1fr;
+
+    grid-template-rows: 1fr 1fr;
+    overflow: hidden;
+  }
+  .new-card:nth-child(n + 3) {
+    display: none;
+  }
 }
 </style>

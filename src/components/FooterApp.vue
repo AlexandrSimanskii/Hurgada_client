@@ -107,4 +107,33 @@
   margin-bottom: 8px;
   font-size: 28px;
 }
+@media (max-width: 1124px) {
+  .footer {
+    padding: 0;
+  }
+  .lists-group {
+    padding: 40px 20px 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .left-group {
+    gap: 20px;
+  }
+
+  .lists-group {
+    padding: 20px 0 28px;
+  }
+}
+@media (max-width: 480px) {
+  .list {
+    font-size: 12px;
+  }
+  .lists-title {
+    font-size: 20px;
+  }
+  .lists-group {
+    gap: 10px;
+  }
+}
 </style>

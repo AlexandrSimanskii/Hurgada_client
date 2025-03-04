@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import SocialBlock from './SocialBlock.vue';
+import SocialBlock from './SocialBlock.vue'
 </script>
 
 <style scoped>
@@ -106,6 +106,29 @@ import SocialBlock from './SocialBlock.vue';
 @keyframes playAnimate {
   to {
     transform: scale(1);
+  }
+}
+
+@media (max-width: 1320px) {
+  .welcome__content {
+    max-width: 860px;
+  }
+}
+
+@media (max-width: 980px) {
+  .welcome__content {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 680px) {
+  .welcome__content {
+    max-width: 280px;
+  }
+}
+@media (max-width: 420px) {
+  .welcome__content {
+    max-width: 220px;
   }
 }
 </style>

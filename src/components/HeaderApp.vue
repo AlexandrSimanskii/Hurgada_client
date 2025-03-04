@@ -23,7 +23,7 @@
       <li class="decoration" :style="{ left: decorationLeft, width: decorationWidth }"></li>
     </ul>
     <div class="weather">
-      <img src="/src/assets/images/icons/wheather.png" alt="cloud" />Hurghada, Red Sea
+      <img src="/src/assets/images/icons/wheather.png" alt="cloud" /><span>Hurghada, Red Sea</span>
       {{ temperature }}C
     </div>
     <ul class="icons">
@@ -93,25 +93,18 @@ const getWeather = async () => {
 }
 getWeather()
 
-function setUnderLine() {
-  let element = document.querySelector(`[data-name="${activeLink.value}"]`)
-  if (!element) return
+const setUnderLine = () => {
+  const element = document.querySelector(`[data-name="${activeLink.value}"]`) as HTMLElement | null;
+  const navigation = document.querySelector('.navigation') as HTMLElement | null;
+  if (!element || !navigation) return;
 
-  const elementCoords = element.getBoundingClientRect()
-  const width = elementCoords.width
-  const left = elementCoords.left
-  const navigation = document.querySelector('.navigation')
-  if (!navigation) return
-  const navigationCoords = navigation.getBoundingClientRect()
-  const navigationLeft = navigation ? navigationCoords.left : 0
+  const { width, left } = element.getBoundingClientRect();
+  const navigationLeft = navigation.getBoundingClientRect().left;
 
-  if (elementCoords.bottom - navigationCoords.bottom > navigationCoords.height) {
-    return (decorationWidth.value = '0px')
-  }
+  decorationLeft.value = `${left - navigationLeft}px`;
+  decorationWidth.value = `${width}px`;
+};
 
-  decorationLeft.value = `${left - navigationLeft}px`
-  decorationWidth.value = `${width}px`
-}
 
 const handlerClickList = async (e: Event, key: string, value: string) => {
   // if (!value) {
@@ -258,6 +251,41 @@ watch(activeLink, async () => {
   to {
     top: 0;
     opacity: 1;
+  }
+}
+
+@media (max-width: 1120px) {
+  .header {
+    gap: 20px;
+  }
+  .weather span {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .navigation {
+    display: none;
+  }
+  .decoration{display: none;}
+  @media (max-width: 520px) {
+    .header {
+      gap: 8px;
+    }
+    .logo {
+      width: 100px;
+    }
+    .icons__el {
+      padding: 0 10px;
+      /* width: 16px; */
+    }
+  }
+  @media (max-width: 360px) {
+    .language {
+      transform: translateY(-10px);
+      gap: 2px;
+      font-size: 10px;
+    }
   }
 }
 </style>
