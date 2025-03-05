@@ -50,6 +50,7 @@ const props = defineProps<{
 <style scoped>
 .swiper {
   width: 100%;
+  height: 400px;
 }
 
 .swiper-slide {

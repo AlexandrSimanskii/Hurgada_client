@@ -135,5 +135,8 @@
   .lists-group {
     gap: 10px;
   }
+  .footer-info {
+    font-size: 8px;
+  }
 }
 </style>

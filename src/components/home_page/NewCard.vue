@@ -1,6 +1,6 @@
 <template>
   <div class="card" :style="{ backgroundImage: `url(${props.image})` }">
-    <div class="glass">
+    <div ref="glass" class="glass">
       <p ref="title" class="title"><slot name="title"></slot></p>
       <p ref="subtitle" class="subtitle"><slot name="subtitle"></slot></p>
       <div class="time">
@@ -17,17 +17,18 @@
 import { onMounted, ref } from 'vue'
 const title = ref<HTMLElement | null>(null)
 const subtitle = ref<HTMLElement | null>(null)
+const glass = ref<HTMLElement | null>(null)
 
 const props = defineProps<{
   image: string
 }>()
 
 onMounted(() => {
-  if (subtitle.value && title.value) {
-    const width = title.value?.clientWidth
-    console.log(width);
-    
+  if (subtitle.value && title.value && glass.value) {
+    const width = glass.value?.clientWidth-40 
+
     subtitle.value.style.width = `${width}px`
+    title.value.style.width = `${width}px`
   }
 })
 </script>
@@ -35,10 +36,8 @@ onMounted(() => {
 <style scoped>
 .card {
   display: flex;
-
   align-items: end;
   color: white;
-
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -52,6 +51,7 @@ onMounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .title {
+  width: 10px;
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 10px;
@@ -67,12 +67,13 @@ onMounted(() => {
   gap: 10px;
 }
 .subtitle {
-  width: 100px;
+  overflow: hidden;
+  width: 10px;
   color: #ededed;
   font-weight: 500;
   font-size: 20px;
   white-space: nowrap;
-  overflow: hidden;
+
   text-overflow: ellipsis;
 }
 .time img {

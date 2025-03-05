@@ -29,4 +29,20 @@ const props = defineProps<{
   font-weight: 500;
   padding: 20px 86px;
 }
+
+@media (max-width: 1240px) {
+  .button {
+    padding: 10px 64px;
+  }
+}
+
+@media (max-width: 720px) {
+  .button {
+    padding: 10px 44px;
+  }
+}@media (max-width: 480px) {
+  .button {
+    padding: 6px 12px;
+  }
+}
 </style>

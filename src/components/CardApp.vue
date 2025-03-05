@@ -34,7 +34,8 @@ const { _id, name, images, category, description, reviews, rating } = props.card
 
 <style scoped>
 @import '@/assets/style/variable';
-.card {cursor: pointer;
+.card {
+  cursor: pointer;
   min-width: 480px;
   max-width: 520px;
   border-radius: 8px;
@@ -68,5 +69,11 @@ const { _id, name, images, category, description, reviews, rating } = props.card
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+@media (max-width: 1024px) {
+  .card {
+    min-width: 290px;
+    max-width: 400px;
+  }
 }
 </style>

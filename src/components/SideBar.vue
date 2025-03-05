@@ -44,4 +44,9 @@ const emit = defineEmits(['clickClose'])
   right: 16px;
   top: 16px;
 }
+@media (max-width: 640px) {
+  .sidebar {
+    width: 320px;
+  }
+}
 </style>

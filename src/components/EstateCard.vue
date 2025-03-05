@@ -27,8 +27,8 @@
       </ul>
       <div class="price">${{ price }} <span class="price__span">per night</span></div>
       <div class="buttons">
-        <my-button class="button">Coll</my-button>
-        <my-button>Message</my-button>
+        <my-button class="btn button">Coll</my-button>
+        <my-button class="btn">Message</my-button>
       </div>
     </div>
   </div>
@@ -94,5 +94,21 @@ const { name, images, description, price, area, bathroom, beds, rating, location
   z-index: 10;
   position: absolute;
   top: 0px;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex-direction: column;
+  }
+  .card__img {
+    object-fit: contain;
+    width: 100%;
+    background-repeat: no-repeat;
+  }
+}
+@media (max-width: 580px) {
+  .btn {
+    padding: 10px 20px;
+  }
 }
 </style>

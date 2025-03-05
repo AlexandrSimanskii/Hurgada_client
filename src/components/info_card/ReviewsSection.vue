@@ -66,6 +66,7 @@ const reviewsData = computed(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 40px;
 }
 .reviews-title {
   margin-bottom: 40px;
@@ -112,5 +113,11 @@ const reviewsData = computed(() => {
 }
 .but {
   background-color: #e9e9e966;
+}
+
+@media (max-width: 640px) {
+  .buttons {
+    flex-direction: column;
+  }
 }
 </style>

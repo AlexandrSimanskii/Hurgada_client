@@ -69,6 +69,7 @@ const categoryHandler = async (category: string) => {}
   align-items: center;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 15px;
 }
 .category {
@@ -79,5 +80,31 @@ const categoryHandler = async (category: string) => {}
   color: var(--primaryMain);
   border: 1px solid #e0e0e0;
   border-radius: 5px;
+}
+@media (max-width: 1440px) {
+  .cards {
+    justify-content: space-around;
+  }
+}
+@media (max-width: 880px) {
+  .categories {
+    gap: 8px;
+  }
+  .category {
+    padding: 4px 24px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 420px) {
+  .title {
+    font-size: 18px;
+    width: 500;
+    margin-bottom: 16px;
+  }
+
+  .category {
+    padding: 4px 16px;
+    font-size: 16px;
+  }
 }
 </style>

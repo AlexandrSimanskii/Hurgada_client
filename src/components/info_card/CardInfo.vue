@@ -91,7 +91,6 @@ const durationText = computed(() => {
 
 <style scoped>
 .card {
-  width: 100%;
   display: flex;
   gap: 20px;
 }
@@ -197,5 +196,18 @@ const durationText = computed(() => {
 }
 .info-btn {
   padding: 20px;
+}
+
+@media (max-width: 1240px) {
+  .card {
+    flex-direction: column;
+  }
+  .slide {
+    width: 100%;
+  }
+
+  .card-info {
+    width: 100%;
+  }
 }
 </style>

@@ -14,7 +14,6 @@
       <div class="swiper-button-prev button"></div>
     </div>
 
-    <!-- Слайдер миниатюр -->
     <div class="swiper thumbnail-swiper">
       <div class="swiper-wrapper">
         <div v-for="slide of slides" class="swiper-slide">
@@ -26,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
-import excursionsForSlider from '@/constants/excursionImages'
+import { onMounted } from 'vue'
+
 import Swiper from 'swiper'
 import { Navigation, Thumbs, FreeMode } from 'swiper/modules'
 import 'swiper/css'
@@ -100,5 +99,10 @@ onMounted(() => {
   padding: 20px;
   background-color: aliceblue;
   color: var(--primaryMain);
+}
+@media (max-width: 640px) {
+  .thumbnail-swiper {
+    display: none;
+  }
 }
 </style>

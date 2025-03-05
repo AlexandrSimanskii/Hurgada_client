@@ -1,14 +1,12 @@
 <template>
   <div ref="paginator" class="custom-paginator" v-if="localTotalCount > limit">
-    <div class="show-more">
-      <my-button class="icon" :image="updateIcon" @click="onShowMore"> Show more </my-button>
-    </div>
+    <my-button class="icon" :image="updateIcon" @click="onShowMore"> Show more </my-button>
 
     <Paginator
       :rows="limit"
       :totalRecords="props.totalCount"
       :first="first"
-      :pageLinkSize="6"
+       :pageLinkSize="pageLinkSize"
       :template="'PrevPageLink PageLinks  CustomNextContent NextPageLink   '"
       @page="onPageChange"
     >
@@ -18,7 +16,7 @@
 
 <script setup lang="ts">
 import updateIcon from '@/assets/images/icons/update.svg'
-import { ref, computed, watchEffect, onMounted } from 'vue'
+import { ref, computed, watchEffect, onMounted,onUnmounted } from 'vue'
 import Paginator from 'primevue/paginator'
 import MyButton from './UI/MyButton.vue'
 
@@ -48,11 +46,27 @@ const onShowMore = () => {
   }
 }
 
+
+
+const pageLinkSize = ref(window.innerWidth < 600 ? 3 : 6);
+
+const updatePageLinkSize = () => {
+  pageLinkSize.value = window.innerWidth < 600 ? 3 : 6;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", updatePageLinkSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updatePageLinkSize);
+});
+
+
 const onPageChange = (event: { first: number }) => {
   first.value = event.first
   emit('page', first.value)
 }
-
 </script>
 
 <style>
@@ -89,5 +103,10 @@ const onPageChange = (event: { first: number }) => {
 }
 .custom-paginator .icon {
   padding: 20px 106px;
+}
+@media (max-width: 640px) {
+  .custom-paginator .icon {
+    padding: 10px;
+  }
 }
 </style>
