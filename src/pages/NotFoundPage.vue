@@ -1,7 +1,7 @@
 <template>
   <div class="not-found">
     <div class="content">
-      <h6 class="content__title">Welcome the 404th wonder of the Hurghada</h6>
+      <h6 class="content__title">Welcome to Hurghada</h6>
       <p class="content__text">Plan your trip with us</p>
       <my-button class="button buttonGlass" @click="$router.push('/')">
         <span class="button__text">Home Page</span></my-button
@@ -28,7 +28,7 @@ store.setActive('')
   width: 100%;
   height: 100vh;
   color: var(--primaryHeader);
-  background-image: url(@/assets/images/image/notFound.png);
+  background-image: url("/images/image/notFound.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -46,7 +46,7 @@ store.setActive('')
   font-size: 20px;
 }
 .digit {
-  background: url(@/assets/images/image/404_1.jpg);
+  background: url("/images/image/404_1.jpg");
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -67,8 +67,8 @@ store.setActive('')
 .button__text::before {
   content: '';
   position: absolute;
-  mask-image: url(@/assets/images/icons/toHome.svg);
-  -webkit-mask-image: url(@/assets/images/icons/toHome.svg);
+  mask-image: url("/images/icons/toHome.svg");
+  -webkit-mask-image: url("/images/icons/toHome.svg");
   mask-size: cover;
   width: 24px;
   height: 24px;
