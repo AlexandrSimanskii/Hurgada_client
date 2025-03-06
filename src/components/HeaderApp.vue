@@ -1,12 +1,7 @@
 <template>
   <header class="header container">
     <router-link to="/">
-      <img
-        @click="handlerClickLogo"
-        class="logo"
-        src="/src/assets/images/image/hurghada.png"
-        alt="hurghada"
-      />
+      <img @click="handlerClickLogo" class="logo" src="/images/image/hurghada.png" alt="hurghada" />
     </router-link>
 
     <ul class="navigation">
@@ -23,21 +18,18 @@
       <li class="decoration" :style="{ left: decorationLeft, width: decorationWidth }"></li>
     </ul>
     <div class="weather">
-      <img src="/src/assets/images/icons/wheather.png" alt="cloud" /><span>Hurghada, Red Sea</span>
+      <img src="/images/icons/wheather.png" alt="cloud" /><span>Hurghada, Red Sea</span>
       {{ temperature }}C
     </div>
     <ul class="icons">
       <li class="icons__el" @click="$emit('showModal', 'signIn')">
-        <img src="/src/assets/images/icons/user.svg" />
+        <img src="/images/icons/user.svg" />
       </li>
       <li class="icons__el" @click="$emit('showModal', 'menu')">
-        <img src="/src/assets/images/icons/Menu.svg" />
+        <img src="/images/icons/Menu.svg" />
       </li>
     </ul>
-    <div class="language">
-      En
-      
-    </div>
+    <div class="language">En</div>
   </header>
   <Toast />
 </template>
@@ -46,7 +38,7 @@
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
 import navList from '@/constants/navlist'
-import { ref, nextTick, watchEffect, watch } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useActiveLink } from '@/stores/activeLink'
@@ -219,7 +211,6 @@ watch(activeLink, async () => {
   display: flex;
   gap: 5px;
 }
-
 
 .decoration {
   transition-duration: 500ms;

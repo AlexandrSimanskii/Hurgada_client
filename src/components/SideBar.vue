@@ -2,7 +2,7 @@
   <div class="shadow" @click="$emit('clickClose')"></div>
   <aside class="sidebar">
     <button class="close-button" @click="$emit('clickClose')">
-      <img src="@/assets/images/icons/closed.svg" alt="Close" /></button
+      <img src="/images/icons/closed.svg" alt="Close" /></button
     ><slot />
   </aside>
 </template>

@@ -37,11 +37,14 @@
       </p>
 
       <div class="info__btns">
-        <my-button @click="showModal()" :image="CalendarCheck" class="buttonColored"
+        <my-button
+          @click="showModal()"
+          :image="'/images/icons/CalendarCheck.svg'"
+          class="buttonColored"
           >Book now</my-button
         >
-        <my-button class="info-btn" :image="PhoneCall"></my-button>
-        <my-button class="info-btn" :image="Message"></my-button>
+        <my-button class="info-btn" :image="'/images/icons/PhoneCall.svg'"></my-button>
+        <my-button class="info-btn" :image="'/images/icons/message.svg'"></my-button>
       </div>
     </div>
   </div>
@@ -53,9 +56,6 @@ import CardSlider from '../sliders/CardSlider.vue'
 import MyRating from '@/components/MyRating.vue'
 
 import MyButton from '@/components/UI/MyButton.vue'
-import CalendarCheck from '@/assets/images/icons/CalendarCheck.svg'
-import Message from '@/assets/images/icons/message.svg'
-import PhoneCall from '@/assets/images/icons/PhoneCall.svg'
 import { type CardsType } from '@/types/types'
 import { computed, ref } from 'vue'
 

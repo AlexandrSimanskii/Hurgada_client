@@ -11,17 +11,17 @@
       <p>{{ description }}</p>
       <ul class="lists">
         <li class="list">
-          <img src="@/assets/images/icons/estate_icons/MapPinLine.png" />{{ location }}
+          <img src="/images/icons/estate_icons/MapPinLine.png" />{{ location }}
         </li>
         <li class="list">
-          <img src="@/assets/images/icons/estate_icons/bathroom.png" />{{ bathroom }}
+          <img src="/images/icons/estate_icons/bathroom.png" />{{ bathroom }}
           {{ bathroom > 1 ? 'bathrooms' : 'bathroom' }}
         </li>
         <li class="list">
-          <img src="@/assets/images/icons/estate_icons/FrameCorners.png " />{{ area }} m2 apartment
+          <img src="/images/icons/estate_icons/FrameCorners.png " />{{ area }} m2 apartment
         </li>
         <li class="list">
-          <img src="@/assets/images/icons/estate_icons/beds.png" />{{ beds }}
+          <img src="/images/icons/estate_icons/beds.png" />{{ beds }}
           {{ beds > 1 ? 'beds' : 'bed' }}
         </li>
       </ul>
@@ -108,7 +108,7 @@ const { name, images, description, price, area, bathroom, beds, rating, location
 }
 @media (max-width: 580px) {
   .btn {
-    padding: 10px 20px;
+    padding: 1;
   }
 }
 </style>

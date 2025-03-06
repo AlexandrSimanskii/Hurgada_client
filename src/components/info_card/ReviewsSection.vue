@@ -15,7 +15,7 @@
         </div>
 
         <div class="likes">
-          <img src="/src/assets/images/icons/like.svg" alt="" />
+          <img src="/images/icons/like.svg" alt="" />
           <p>({{ rev.like }})</p>
         </div>
       </div>
@@ -25,15 +25,13 @@
       </p>
     </div>
     <div class="buttons">
-      <my-button class="but" :image="update">Show more reviews</my-button>
-      <my-button class="buttonColored" :image="signIn">Add review</my-button>
+      <my-button class="but" :image="'/images/icons/update.svg'">Show more reviews</my-button>
+      <my-button class="buttonColored" :image="'/images/icons/SignIn.svg'">Add review</my-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import update from '@/assets/images/icons/update.svg'
-import signIn from '@/assets/images/icons/SignIn.svg'
 import MyRating from '@/components/MyRating.vue'
 import reviews from '@/constants/reviews'
 import MyButton from '../UI/MyButton.vue'

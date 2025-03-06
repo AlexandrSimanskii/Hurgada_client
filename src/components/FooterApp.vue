@@ -31,10 +31,10 @@
             <div class="dl__group">
               <dt class="list__dt">Social media</dt>
               <dd class="list__dd social">
-                <img src="@/assets/images/icons/social/Instagram.svg" alt="Instagram" />
-                <img src="@/assets/images/icons/social/Twitter.svg" alt="Twitter" />
-                <img src="@/assets/images/icons/social/Youtube.svg" alt="Youtube" />
-                <img src="@/assets/images/icons/social/Facebook.svg" alt="Facebook" />
+                <img src="/images/icons/social/Instagram.svg" alt="Instagram" />
+                <img src="/images/icons/social/Twitter.svg" alt="Twitter" />
+                <img src="/images/icons/social/Youtube.svg" alt="Youtube" />
+                <img src="/images/icons/social/Facebook.svg" alt="Facebook" />
               </dd>
             </div>
           </dl>

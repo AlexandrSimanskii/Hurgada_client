@@ -1,7 +1,7 @@
 <template>
   <section class="top-section">
     <div class="welcome">
-      <img class="welcome__content" src="@/assets/images/image/title.svg" alt="" />
+      <img class="welcome__content" src="/images/image/Title.svg" alt="" />
       <div class="play"></div>
     </div>
     <aside class="aside">
@@ -19,7 +19,7 @@ import SocialBlock from './SocialBlock.vue'
 .top-section {
   margin-bottom: 60px;
   position: relative;
-  background-image: url(@/assets/images/image/mainImg.jpg);
+  background-image: url("/images/image/mainImg.jpg");
   background-size: cover;
   overflow: hidden;
   background-repeat: no-repeat;
@@ -83,7 +83,7 @@ import SocialBlock from './SocialBlock.vue'
   animation-delay: calc((var(--main-animation-duration) + var(--main-animation-delay)) * 1);
 }
 .play::before {
-  content: url(@/assets/images/icons/play.png);
+  content: url("/images/icons/play.png");
   position: absolute;
   z-index: 5;
   top: 50%;

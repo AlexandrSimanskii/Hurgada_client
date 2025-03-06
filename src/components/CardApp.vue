@@ -36,8 +36,8 @@ const { _id, name, images, category, description, reviews, rating } = props.card
 @import '@/assets/style/variable';
 .card {
   cursor: pointer;
-  min-width: 480px;
-  max-width: 520px;
+  min-width: 400px;
+  max-width: 420px;
   border-radius: 8px;
   overflow: hidden;
 }

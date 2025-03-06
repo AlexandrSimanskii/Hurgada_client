@@ -1,10 +1,10 @@
 <template>
   <div class="icons">
     <div class="icon" data-icon="true">
-      <img data-icon="true" src="/src/assets/images/icons/Heart.png" />
+      <img data-icon="true" src="/images/icons/Heart.png" />
     </div>
     <div class="icon" data-icon="true">
-      <img data-icon="true" src="/src/assets/images/icons/share.png" />
+      <img data-icon="true" src="/images/icons/share.png" />
     </div>
   </div>
 </template>

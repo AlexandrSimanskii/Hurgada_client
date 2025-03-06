@@ -5,14 +5,14 @@
         <span>Name</span>
 
         <div class="custom-input">
-          <img class="input-image" src="@/assets/images/icons/person.svg" />
+          <img class="input-image" src="/images/icons/person.svg" />
           <InputText placeholder="Name" /></div
       ></label>
 
       <label
         ><span>How many person</span>
         <div class="custom-select">
-          <img class="input-image" src="@/assets/images/icons/users.svg" />
+          <img class="input-image" src="/images/icons/users.svg" />
           <Select
             class="my-select"
             v-model="selectedCity"
@@ -21,7 +21,7 @@
             placeholder="Select"
           >
             <template #dropdownicon>
-              <img src="@/assets/images/icons/select.svg" alt="" />
+              <img src="/images/icons/select.svg" alt="" />
             </template>
           </Select></div
       ></label>
@@ -29,7 +29,7 @@
       <label>
         <span>Language</span>
         <div class="custom-select">
-          <img class="input-image" src="@/assets/images/icons/earth.svg" />
+          <img class="input-image" src="/images/icons/earth.svg" />
           <Select
             class="my-select"
             v-model="selectedLanguage"
@@ -38,7 +38,7 @@
             placeholder="Select Language"
           >
             <template #dropdownicon>
-              <img src="@/assets/images/icons/select.svg" alt="" />
+              <img src="/images/icons/select.svg" alt="" />
             </template>
           </Select>
         </div>
@@ -46,7 +46,7 @@
       <label>
         <span>Date</span>
         <div class="custom-picker">
-          <img class="input-image" src="@/assets/images/icons/earth.svg" />
+          <img class="input-image" src="/images/icons/earth.svg" />
           <DatePicker
             class="my-picker"
             placeholder="Date"
@@ -57,7 +57,7 @@
           >
             <template #inputicon="slotProps">
               <img
-                src="@/assets/images/icons/select.svg"
+                src="/images/icons/select.svg"
                 alt=""
                 @click="slotProps.clickCallback"
               /> </template
@@ -67,24 +67,27 @@
         <span>Pickup location</span>
 
         <div class="custom-input">
-          <img class="input-image" src="@/assets/images/icons/person.svg" />
+          <img class="input-image" src="/images/icons/person.svg" />
           <InputText placeholder="Enter adress" /></div
       ></label>
       <label>
         <span>Phone</span>
 
         <div class="custom-input">
-          <img class="input-image" src="@/assets/images/icons/person.svg" />
+          <img class="input-image" src="/images/icons/person.svg" />
           <InputText placeholder="Enter phone" /></div
       ></label>
       <label>
         <span>Email</span>
 
         <div class="custom-input">
-          <img class="input-image" src="@/assets/images/icons/person.svg" />
+          <img class="input-image" src="/images/icons/person.svg" />
           <InputText placeholder="Enter email" /></div
       ></label>
-      <my-button @click.prevent="formSubmit" :image="CalendarCheck" class="buttonColored"
+      <my-button
+        @click.prevent="formSubmit"
+        :image="'/images/icons/CalendarCheck.svg'"
+        class="buttonColored"
         >Submit</my-button
       >
     </form></template
@@ -101,7 +104,6 @@ import InputText from 'primevue/inputtext'
 import Select from 'primevue/select'
 import DatePicker from 'primevue/datepicker'
 import { useSidebarStore } from '@/stores/sidebarStore'
-import CalendarCheck from '@/assets/images/icons/CalendarCheck.svg'
 
 const store = useSidebarStore()
 const name = ref('')
