@@ -36,7 +36,7 @@
     </ul>
     <div class="language">
       En
-      <div class="img"></div>
+      
     </div>
   </header>
   <Toast />
@@ -214,24 +214,13 @@ watch(activeLink, async () => {
 }
 
 .language {
+  position: relative;
   cursor: pointer;
   display: flex;
   gap: 5px;
 }
-.img {
-  position: relative;
-}
-.img ::before {
-  content: '';
-  position: absolute;
-  right: -5px;
-  top: 50%;
-  mask-image: url('@assets/images/icons/language.svg');
-  mask-size: cover;
-  width: 5px;
-  height: 5px;
-  background-color: rgb(0, 255, 98);
-}
+
+
 .decoration {
   transition-duration: 500ms;
   position: absolute;
