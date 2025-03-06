@@ -164,14 +164,14 @@ const durationText = computed(() => {
   height: 24px;
 }
 .group::before {
-  background-image: url('@/assets/images/icons/users.svg');
+  background-image: url('/images/icons/users.svg');
 }
 .pickup::before {
-  background-image: url('@/assets/images/icons/car.svg');
+  background-image: url('/images/icons/car.svg');
 }
 
 .duration::before {
-  background-image: url('@/assets/images/icons/Timer.svg');
+  background-image: url('/images/icons/Timer.svg');
 }
 .info__location {
   font-weight: 500;
