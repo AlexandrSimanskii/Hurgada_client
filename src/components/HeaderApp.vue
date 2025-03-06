@@ -94,17 +94,16 @@ const getWeather = async () => {
 getWeather()
 
 const setUnderLine = () => {
-  const element = document.querySelector(`[data-name="${activeLink.value}"]`) as HTMLElement | null;
-  const navigation = document.querySelector('.navigation') as HTMLElement | null;
-  if (!element || !navigation) return;
+  const element = document.querySelector(`[data-name="${activeLink.value}"]`) as HTMLElement | null
+  const navigation = document.querySelector('.navigation') as HTMLElement | null
+  if (!element || !navigation) return
 
-  const { width, left } = element.getBoundingClientRect();
-  const navigationLeft = navigation.getBoundingClientRect().left;
+  const { width, left } = element.getBoundingClientRect()
+  const navigationLeft = navigation.getBoundingClientRect().left
 
-  decorationLeft.value = `${left - navigationLeft}px`;
-  decorationWidth.value = `${width}px`;
-};
-
+  decorationLeft.value = `${left - navigationLeft}px`
+  decorationWidth.value = `${width}px`
+}
 
 const handlerClickList = async (e: Event, key: string, value: string) => {
   // if (!value) {
@@ -227,7 +226,7 @@ watch(activeLink, async () => {
   position: absolute;
   right: -5px;
   top: 50%;
-  mask-image: url(@assets/images/icons/language.svg);
+  mask-image: url('@assets/images/icons/language.svg');
   mask-size: cover;
   width: 5px;
   height: 5px;
@@ -267,7 +266,9 @@ watch(activeLink, async () => {
   .navigation {
     display: none;
   }
-  .decoration{display: none;}
+  .decoration {
+    display: none;
+  }
   @media (max-width: 520px) {
     .header {
       gap: 8px;
