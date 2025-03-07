@@ -1,4 +1,4 @@
-export const BASE_URL: string = 'https://hurgada-server.vercel.app/api/'
+export const BASE_URL: string = 'https://test-five-psi-25.vercel.app/api/'
 export const NIGHTS: string = `${BASE_URL}nights/get`
 export const FOODS: string = `${BASE_URL}foods/get`
 export const EXCURSION: string = `${BASE_URL}excursions/get`
