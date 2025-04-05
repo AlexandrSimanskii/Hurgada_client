@@ -17,6 +17,7 @@
       </li>
       <li class="decoration" :style="{ left: decorationLeft, width: decorationWidth }"></li>
     </ul>
+
     <div class="weather">
       <img src="/images/icons/wheather.png" alt="cloud" /><span>Hurghada, Red Sea</span>
       {{ temperature }}C
@@ -90,11 +91,29 @@ const setUnderLine = () => {
   const navigation = document.querySelector('.navigation') as HTMLElement | null
   if (!element || !navigation) return
 
-  const { width, left } = element.getBoundingClientRect()
-  const navigationLeft = navigation.getBoundingClientRect().left
+  const elementRect = element.getBoundingClientRect()
+  const navigationRect = navigation.getBoundingClientRect()
+
+  let { width, left } = elementRect
+  let navigationLeft = navigationRect.left
+
+  if (elementRect.top - navigationRect.top > 10) {
+    decorationLeft.value = `0px`
+    width = 0
+    left = 0
+    navigationLeft = 0
+  }
 
   decorationLeft.value = `${left - navigationLeft}px`
   decorationWidth.value = `${width}px`
+
+  sessionStorage.setItem(
+    'header',
+    JSON.stringify({
+      decorationLeft: decorationLeft.value,
+      decorationWidth: decorationWidth.value
+    })
+  )
 }
 
 const handlerClickList = async (e: Event, key: string, value: string) => {
@@ -105,15 +124,6 @@ const handlerClickList = async (e: Event, key: string, value: string) => {
 
   setLink(key)
   router.push(`/${value}`)
-
-  await nextTick()
-  sessionStorage.setItem(
-    'header',
-    JSON.stringify({
-      decorationLeft: decorationLeft.value,
-      decorationWidth: decorationWidth.value
-    })
-  )
 }
 
 function handlerClickLogo() {
